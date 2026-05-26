@@ -1,6 +1,30 @@
 /* Tailvani polish layer for Dawn. Safe visual-only CSS. */
-:root{--tv-cream:#F6EFE5;--tv-olive:#2F3526;--tv-coral:#C47B5A;--tv-gold:#C8A15A;}
-.header-wrapper{border-bottom:1px solid rgba(200,161,90,.28);}
-.button{letter-spacing:.08em;text-transform:uppercase;}
-.card{overflow:hidden;}
+:root{--tv-cream:#F6EFE5;--tv-olive:#2F3526;--tv-coral:#C47B5A;--tv-gold:#C8A15A;--tv-sand:#DCCBB5;}
+
+.header-wrapper{border-bottom:1px solid rgba(200,161,90,.28);backdrop-filter:blur(10px);}
+
+.header__menu-item,.header__icon,.header__active-menu-item{transition:color .18s ease;}
+.header__menu-item:hover,.header__icon:hover,.header__active-menu-item{color:var(--tv-coral);}
+
+.button{letter-spacing:.08em;text-transform:uppercase;border-radius:999px;transition:all .18s ease;}
+.button:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(47,53,38,.12);}
+
+.card{overflow:hidden;border-radius:2rem;transition:transform .18s ease,box-shadow .18s ease;}
+.card:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(47,53,38,.10);}
+
+.collection-list .card__heading,.card__heading,.product__title h1{letter-spacing:-.02em;}
+
+.price,.price-item{color:var(--tv-olive);}
+.badge{border-radius:999px;}
+
+.newsletter-form__field-wrapper .field__input,.field__input{border-radius:999px;}
+
 .footer{border-top:1px solid rgba(200,161,90,.28);}
+.footer__content-top{padding-top:5rem;}
+
+.rich-text__heading,.title,.h0,.h1,.h2{letter-spacing:-.03em;}
+
+@media screen and (max-width:749px){
+  .header-wrapper{backdrop-filter:none;}
+  .card{border-radius:1.6rem;}
+}
