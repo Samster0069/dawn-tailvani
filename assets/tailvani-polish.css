@@ -1,0 +1,6 @@
+/* Tailvani polish layer for Dawn. Safe visual-only CSS. */
+:root{--tv-cream:#F6EFE5;--tv-olive:#2F3526;--tv-coral:#C47B5A;--tv-gold:#C8A15A;}
+.header-wrapper{border-bottom:1px solid rgba(200,161,90,.28);}
+.button{letter-spacing:.08em;text-transform:uppercase;}
+.card{overflow:hidden;}
+.footer{border-top:1px solid rgba(200,161,90,.28);}
