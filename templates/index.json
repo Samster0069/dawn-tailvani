@@ -1,45 +1,21 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Tailvani™",
-            "heading_size": "h0"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "Style For Every Tail",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": false,
-            "button_label_2": "New arrivals",
-            "button_link_2": "shopify://collections/all",
-            "button_style_secondary_2": true
-          }
-        }
-      },
-      "block_order": ["heading", "text", "button"],
+    "hero_banner": {
+      "type": "custom-liquid",
       "settings": {
-        "image_overlay_opacity": 10,
-        "image_height": "large",
-        "desktop_content_position": "middle-center",
-        "show_text_box": true,
-        "desktop_content_alignment": "center",
+        "custom_liquid": "<section style='padding:0;background:#F6EFE5'><img src='{{ \"wide_banner.png\" | asset_url }}' alt='Tailvani banner' style='width:100%;display:block;border-radius:0;'/></section>",
         "color_scheme": "scheme-1",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "mobile_story_banner": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<section style='max-width:900px;margin:0 auto;padding:32px 20px;background:#F6EFE5'><img src='{{ \"Long_Banner_1.png\" | asset_url }}' alt='Tailvani lifestyle banner' style='width:100%;border-radius:28px;display:block;box-shadow:0 12px 30px rgba(47,53,38,.08);'/></section>",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "rich_text": {
@@ -63,8 +39,8 @@
       "settings": {
         "color_scheme": "scheme-2",
         "full_width": true,
-        "padding_top": 64,
-        "padding_bottom": 28
+        "padding_top": 52,
+        "padding_bottom": 24
       }
     },
     "featured_collection": {
@@ -83,8 +59,26 @@
         "show_vendor": false,
         "show_rating": false,
         "columns_mobile": "2",
-        "padding_top": 28,
-        "padding_bottom": 64
+        "padding_top": 20,
+        "padding_bottom": 56
+      }
+    },
+    "dog_lifestyle": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<section style='max-width:1400px;margin:0 auto;padding:40px 24px'><div style='display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;background:#FDFAF5;border-radius:32px;overflow:hidden;box-shadow:0 12px 30px rgba(47,53,38,.06)'><img src='{{ \"dog_sky_background.webp\" | asset_url }}' alt='Tailvani dog lifestyle' style='width:100%;height:100%;object-fit:cover;display:block;'/><div style='padding:36px'><h2 style='font-size:clamp(2.4rem,4vw,4.8rem);margin-bottom:18px;color:#2F3526'>Style For Every Tail</h2><p style='font-size:1.7rem;line-height:1.8;color:#2F3526'>Tailvani™ blends boutique pet fashion with everyday comfort for modern pet parents. Designed for dogs, cats, and every tail in between.</p></div></div></section>",
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "pet_gallery": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<section style='padding:20px 24px 56px;background:#F6EFE5'><div style='display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1200px;margin:0 auto'><img src='{{ \"happy_dog.jpg\" | asset_url }}' alt='Happy Tailvani dog' style='width:100%;border-radius:28px;display:block;object-fit:cover;box-shadow:0 12px 30px rgba(47,53,38,.08);'/><img src='{{ \"lying_cat.jpg\" | asset_url }}' alt='Tailvani cat lifestyle' style='width:100%;border-radius:28px;display:block;object-fit:cover;box-shadow:0 12px 30px rgba(47,53,38,.08);'/></div></section>",
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "multicolumn": {
@@ -108,10 +102,10 @@
         "swipe_on_mobile": true,
         "color_scheme": "scheme-2",
         "columns_mobile": "1",
-        "padding_top": 56,
+        "padding_top": 48,
         "padding_bottom": 64
       }
     }
   },
-  "order": ["image_banner", "rich_text", "featured_collection", "multicolumn"]
+  "order": ["hero_banner", "mobile_story_banner", "rich_text", "featured_collection", "dog_lifestyle", "pet_gallery", "multicolumn"]
 }
