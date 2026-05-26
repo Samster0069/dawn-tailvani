@@ -6,13 +6,17 @@
 .header__menu-item,.header__icon,.header__active-menu-item{transition:color .18s ease;}
 .header__menu-item:hover,.header__icon:hover,.header__active-menu-item{color:var(--tv-coral);}
 
+.banner__box,.rich-text__wrapper,.multicolumn-card{border-radius:2rem;}
+
 .button{letter-spacing:.08em;text-transform:uppercase;border-radius:999px;transition:all .18s ease;}
 .button:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(47,53,38,.12);}
 
-.card{overflow:hidden;border-radius:2rem;transition:transform .18s ease,box-shadow .18s ease;}
+.card{overflow:hidden;border-radius:2rem;transition:transform .18s ease,box-shadow .18s ease;background:rgba(255,255,255,.45);}
 .card:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(47,53,38,.10);}
 
 .collection-list .card__heading,.card__heading,.product__title h1{letter-spacing:-.02em;}
+
+.collection .title-wrapper-with-link,.featured-collection .title-wrapper-with-link,.multicolumn .title-wrapper-with-link{margin-bottom:2.8rem;}
 
 .price,.price-item{color:var(--tv-olive);}
 .badge{border-radius:999px;}
@@ -24,7 +28,10 @@
 
 .rich-text__heading,.title,.h0,.h1,.h2{letter-spacing:-.03em;}
 
+.section-template--padding{padding-top:48px;padding-bottom:48px;}
+
 @media screen and (max-width:749px){
   .header-wrapper{backdrop-filter:none;}
-  .card{border-radius:1.6rem;}
+  .card,.banner__box,.rich-text__wrapper,.multicolumn-card{border-radius:1.6rem;}
+  .section-template--padding{padding-top:32px;padding-bottom:32px;}
 }
