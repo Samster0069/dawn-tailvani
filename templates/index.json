@@ -12,7 +12,7 @@
     "mobile_story_banner": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<section class='tv-logo-story'><img class='tv-logo-story__desktop' src='{{ \"logo_favicon_square.png\" | asset_url }}' alt='Tailvani square logo'><img class='tv-logo-story__mobile' src='{{ \"Long_Banner_1.png\" | asset_url }}' alt='Tailvani lifestyle banner'></section>",
+        "custom_liquid": "<style>.tv-story-wrap{max-width:900px;margin:0 auto;padding:32px 20px;background:#F6EFE5;text-align:center}.tv-story-wrap img{width:100%;display:block;border-radius:28px;box-shadow:0 12px 30px rgba(47,53,38,.08)}.tv-story-desktop{max-width:420px;margin:0 auto}.tv-story-mobile{display:none}@media(max-width:749px){.tv-story-wrap{padding:24px 18px}.tv-story-desktop{display:none}.tv-story-mobile{display:block}}</style><section class='tv-story-wrap'><img class='tv-story-desktop' src='{{ \"logo_favicon_square.png\" | asset_url }}' alt='Tailvani square logo'><img class='tv-story-mobile' src='{{ \"Long_Banner_1.png\" | asset_url }}' alt='Tailvani lifestyle banner'></section>",
         "color_scheme": "scheme-2",
         "padding_top": 0,
         "padding_bottom": 0
@@ -66,7 +66,7 @@
     "dog_lifestyle": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<section class='tv-dog-feature'><div class='tv-dog-feature__card'><div class='tv-dog-feature__media'><img src='{{ \"dog_sky_background.webp\" | asset_url }}' alt='Tailvani dog lifestyle'></div><div class='tv-dog-feature__content'><h2>Style For Every Tail</h2><p>Tailvani™ blends boutique pet fashion with everyday comfort for modern pet parents. Designed for dogs, cats, and every tail in between.</p></div></div></section>",
+        "custom_liquid": "<style>.tv-dog-feature{max-width:1400px;margin:0 auto;padding:40px 24px}.tv-dog-card{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;background:#FDFAF5;border-radius:32px;overflow:hidden;box-shadow:0 12px 30px rgba(47,53,38,.06)}.tv-dog-media{height:100%;min-height:420px}.tv-dog-media img{width:100%;height:100%;object-fit:cover;display:block}.tv-dog-copy{padding:36px}.tv-dog-copy h2{font-size:clamp(2.4rem,4vw,4.8rem);margin:0 0 18px;color:#2F3526}.tv-dog-copy p{font-size:1.7rem;line-height:1.8;color:#2F3526;margin:0}@media(max-width:749px){.tv-dog-feature{padding:28px 18px}.tv-dog-card{display:block;border-radius:24px}.tv-dog-media{height:auto;min-height:0}.tv-dog-media img{height:auto;object-fit:contain}.tv-dog-copy{padding:24px 22px 28px}.tv-dog-copy h2{font-size:3rem;line-height:1.05}.tv-dog-copy p{font-size:1.45rem;line-height:1.65}}</style><section class='tv-dog-feature'><div class='tv-dog-card'><div class='tv-dog-media'><img src='{{ \"dog_sky_background.webp\" | asset_url }}' alt='Tailvani dog lifestyle'></div><div class='tv-dog-copy'><h2>Style For Every Tail</h2><p>Tailvani™ blends boutique pet fashion with everyday comfort for modern pet parents. Designed for dogs, cats, and every tail in between.</p></div></div></section>",
         "color_scheme": "scheme-1",
         "padding_top": 0,
         "padding_bottom": 0
