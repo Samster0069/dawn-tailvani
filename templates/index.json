@@ -12,7 +12,7 @@
     "mobile_story_banner": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<style>.tv-story-wrap{max-width:900px;margin:0 auto;padding:32px 20px;background:#F6EFE5;text-align:center}.tv-story-wrap img{width:100%;display:block;border-radius:28px;box-shadow:0 12px 30px rgba(47,53,38,.08)}.tv-story-desktop{max-width:420px;margin:0 auto}.tv-story-mobile{display:none}@media(max-width:749px){.tv-story-wrap{padding:24px 18px}.tv-story-desktop{display:none}.tv-story-mobile{display:block}}</style><section class='tv-story-wrap'><img class='tv-story-desktop' src='{{ \"logo_favicon_square.png\" | asset_url }}' alt='Tailvani square logo'><img class='tv-story-mobile' src='{{ \"Long_Banner_1.png\" | asset_url }}' alt='Tailvani lifestyle banner'></section>",
+        "custom_liquid": "<section style='max-width:900px;margin:0 auto;padding:32px 20px;background:#F6EFE5;text-align:center'><picture><source media='(max-width: 749px)' srcset='{{ \"Long_Banner_1.png\" | asset_url }}'><img src='{{ \"logo_favicon_square.png\" | asset_url }}' alt='Tailvani brand graphic' style='width:100%;max-width:420px;margin:0 auto;display:block;border-radius:28px;box-shadow:0 12px 30px rgba(47,53,38,.08)'></picture></section>",
         "color_scheme": "scheme-2",
         "padding_top": 0,
         "padding_bottom": 0
