@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_banner": {
@@ -35,8 +44,13 @@
           }
         }
       },
-      "block_order": ["heading", "text"],
+      "block_order": [
+        "heading",
+        "text"
+      ],
       "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
         "color_scheme": "scheme-2",
         "full_width": true,
         "padding_top": 52,
@@ -46,19 +60,27 @@
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured Tailvani™ picks",
-        "heading_size": "h2",
         "collection": "all",
         "products_to_show": 8,
+        "title": "Featured Tailvani™ picks",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
+        "full_width": false,
         "show_view_all": true,
-        "swipe_on_mobile": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
+        "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
+        "quick_add": "none",
         "columns_mobile": "2",
+        "swipe_on_mobile": true,
         "padding_top": 20,
         "padding_bottom": 56
       }
@@ -84,28 +106,89 @@
     "multicolumn": {
       "type": "multicolumn",
       "blocks": {
-        "column1": {"type": "column", "settings": {"title": "Thoughtful Design", "text": "<p>Warm boutique-inspired essentials designed for everyday pet life.</p>", "link_label": "Shop now", "link": "shopify://collections/all"}},
-        "column2": {"type": "column", "settings": {"title": "For Dogs & Cats", "text": "<p>Built for the modern pet parent because every tail deserves style.</p>", "link_label": "Browse collections", "link": "shopify://collections/all"}},
-        "column3": {"type": "column", "settings": {"title": "Comfort First", "text": "<p>Minimal, comfortable, and carefully curated with pets in mind.</p>", "link_label": "Shop essentials", "link": "shopify://collections/all"}}
+        "column1": {
+          "type": "column",
+          "settings": {
+            "title": "Thoughtful Design",
+            "text": "<p>Warm boutique-inspired essentials designed for everyday pet life.</p>",
+            "link_label": "Shop now",
+            "link": "shopify://collections/all"
+          }
+        },
+        "column2": {
+          "type": "column",
+          "settings": {
+            "title": "For Dogs & Cats",
+            "text": "<p>Built for the modern pet parent because every tail deserves style.</p>",
+            "link_label": "Browse collections",
+            "link": "shopify://collections/all"
+          }
+        },
+        "column3": {
+          "type": "column",
+          "settings": {
+            "title": "Comfort First",
+            "text": "<p>Minimal, comfortable, and carefully curated with pets in mind.</p>",
+            "link_label": "Shop essentials",
+            "link": "shopify://collections/all"
+          }
+        }
       },
-      "block_order": ["column1", "column2", "column3"],
+      "block_order": [
+        "column1",
+        "column2",
+        "column3"
+      ],
       "settings": {
         "title": "Style For Every Tail",
         "heading_size": "h1",
         "image_width": "third",
         "image_ratio": "adapt",
+        "button_label": "Shop Tailvani™",
+        "button_link": "shopify://collections/all",
         "columns_desktop": 3,
         "column_alignment": "center",
         "background_style": "primary",
-        "button_label": "Shop Tailvani™",
-        "button_link": "shopify://collections/all",
-        "swipe_on_mobile": true,
         "color_scheme": "scheme-2",
         "columns_mobile": "1",
+        "swipe_on_mobile": true,
         "padding_top": 48,
         "padding_bottom": 64
       }
+    },
+    "17798429402547eef1": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_homepage_H8M9wN": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "product": "",
+            "review_data": "real_data",
+            "max_width": 1200
+          }
+        },
+        "judge_me_reviews_preview_badge_w3VBHM": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_homepage_H8M9wN",
+        "judge_me_reviews_preview_badge_w3VBHM"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
-  "order": ["hero_banner", "mobile_story_banner", "rich_text", "featured_collection", "dog_lifestyle", "pet_gallery", "multicolumn"]
+  "order": [
+    "hero_banner",
+    "mobile_story_banner",
+    "rich_text",
+    "featured_collection",
+    "dog_lifestyle",
+    "pet_gallery",
+    "multicolumn",
+    "17798429402547eef1"
+  ]
 }
