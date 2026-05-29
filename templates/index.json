@@ -166,15 +166,10 @@
             "review_data": "real_data",
             "max_width": 1200
           }
-        },
-        "judge_me_reviews_preview_badge_w3VBHM": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
         }
       },
       "block_order": [
-        "judge_me_reviews_review_widget_homepage_H8M9wN",
-        "judge_me_reviews_preview_badge_w3VBHM"
+        "judge_me_reviews_review_widget_homepage_H8M9wN"
       ],
       "settings": {
         "include_margins": true
