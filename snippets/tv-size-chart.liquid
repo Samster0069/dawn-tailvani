@@ -1,0 +1,35 @@
+{% doc %}
+  Renders a reviewed size chart with explicit measurement units.
+  @param {metaobject} chart - Reviewed size chart with rows and measurement units.
+{% enddoc %}
+{%- assign rows = chart.rows.value -%}
+{%- assign unit = chart.unit.value -%}
+{%- if rows != blank -%}
+  {%- if unit == 'cm' or unit == 'in' -%}
+    <details class="tv-information__item">
+      <summary>{{ 'tailvani.information.size_chart' | t | escape }}</summary>
+      <div class="tv-information__body">
+        {%- if chart.instructions.value != blank -%}
+          <p>{{ chart.instructions.value | escape | newline_to_br }}</p>
+        {%- endif -%}
+        <div class="tv-information__table" tabindex="0" role="region" aria-label="{{ 'tailvani.information.size_chart' | t | escape }}">
+          <table>
+            <caption>{{ chart.name.value | escape }} ({{ unit | escape }})</caption>
+            <thead><tr>
+              <th scope="col">{{ 'tailvani.information.size' | t | escape }}</th>
+              <th scope="col">{{ 'tailvani.information.neck' | t | escape }}</th>
+              <th scope="col">{{ 'tailvani.information.chest' | t | escape }}</th>
+              <th scope="col">{{ 'tailvani.information.back' | t | escape }}</th>
+            </tr></thead>
+            <tbody>
+              {%- for row in rows limit: 50 -%}
+                <tr><th scope="row">{{ row.size | escape }}</th><td>{{ row.neck | escape }}</td><td>{{ row.chest | escape }}</td><td>{{ row.back | escape }}</td></tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+        {%- if chart.fit_note.value != blank -%}<p>{{ chart.fit_note.value | escape | newline_to_br }}</p>{%- endif -%}
+      </div>
+    </details>
+  {%- endif -%}
+{%- endif -%}

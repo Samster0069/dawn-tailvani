@@ -1,0 +1,31 @@
+{%- assign visible_collections = 0 -%}
+{%- capture collection_links -%}
+  {%- for item in section.settings.collections -%}
+    {%- if item.all_products_count > 0 -%}
+      {%- assign visible_collections = visible_collections | plus: 1 -%}
+      <li><a class="tv-browse__link" href="{{ item.url | escape }}"{% if collection.id == item.id %} aria-current="page"{% endif %}>{{ item.title | escape }}</a></li>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if visible_collections > 0 -%}
+  <nav class="tv-browse page-width" aria-labelledby="TvBrowseHeading-{{ section.id }}">
+    <h2 id="TvBrowseHeading-{{ section.id }}" class="tv-h2">{{ 'tailvani.browse.heading' | t }}</h2>
+    <ul class="tv-browse__list" role="list">{{ collection_links }}</ul>
+  </nav>
+{%- elsif request.design_mode -%}
+  <p class="page-width tv-editor-note">{{ 'tailvani.browse.empty_editor' | t }}</p>
+{%- endif -%}
+{% stylesheet %}
+  .tv-browse { padding-top: 2rem; padding-bottom: 2rem; }
+  .tv-browse__list { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; margin: 0; padding: 0; }
+  .tv-browse__link { display: inline-flex; align-items: center; min-height: 44px; padding: .8rem 1.6rem; border: 1px solid currentColor; border-radius: 2rem; color: inherit; text-decoration: none; overflow-wrap: anywhere; }
+  .tv-browse__link[aria-current="page"] { font-weight: 700; text-decoration: underline; }
+  .tv-browse__link:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Tailvani collection links",
+  "settings": [{"type":"collection_list","id":"collections","label":"Collections","limit":12}],
+  "presets": [{"name":"Tailvani collection links"}]
+}
+{% endschema %}

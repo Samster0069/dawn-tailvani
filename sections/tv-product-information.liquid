@@ -1,0 +1,62 @@
+{%- liquid
+  assign approved = product.metafields.tailvani.content_approved.value
+  assign chart = product.metafields.tailvani.size_chart.value
+  assign text_keys = 'why,materials,fit_note' | split: ','
+  assign guide_keys = 'care_guide,shipping_class,return_class,safety_notice' | split: ','
+  capture information
+    for key in text_keys
+      assign text = product.metafields.tailvani[key].value
+      if text != blank
+        assign label_key = 'tailvani.information.' | append: key
+        echo '<details class="tv-information__item"><summary>'
+        echo label_key | t | escape
+        echo '</summary><div class="tv-information__body"><p>'
+        echo text | escape | newline_to_br
+        echo '</p></div></details>'
+      endif
+    endfor
+    if chart != blank and chart.reviewed.value == true
+      render 'tv-size-chart', chart: chart
+    endif
+    for key in guide_keys
+      assign guide = product.metafields.tailvani[key].value
+      if guide.reviewed.value == true and guide.customer_message.value != blank
+        assign label_key = 'tailvani.information.' | append: key
+        echo '<details class="tv-information__item"><summary>'
+        echo label_key | t | escape
+        echo '</summary><div class="tv-information__body"><p>'
+        echo guide.customer_message.value | escape | newline_to_br
+        echo '</p></div></details>'
+      endif
+    endfor
+  endcapture
+-%}
+{%- if approved == true and information != blank -%}
+  <section class="tv-information page-width" aria-labelledby="TvInformation-{{ section.id }}">
+    <h2 id="TvInformation-{{ section.id }}">{{ 'tailvani.information.heading' | t | escape }}</h2>
+    {{ information }}
+  </section>
+{%- endif -%}
+{% stylesheet %}
+  .tv-information { padding-block: 2.4rem; }
+  .tv-information__item { border-bottom: 1px solid rgba(var(--color-foreground), .25); }
+  .tv-information__item summary { cursor: pointer; padding: 1.4rem .6rem; min-height: 44px; font-weight: 600; }
+  .tv-information__item summary:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+  .tv-information__body { padding: .2rem .6rem 1.6rem; overflow-wrap: anywhere; }
+  .tv-information__body p { margin-top: 0; }
+  .tv-information__table { max-width: 100%; overflow-x: auto; }
+  .tv-information__table:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+  .tv-information table { width: 100%; border-collapse: collapse; }
+  .tv-information th, .tv-information td { padding: 1rem; text-align: start; border: 1px solid rgba(var(--color-foreground), .25); }
+  .tv-information caption { text-align: start; padding-block: 1rem; font-weight: 600; }
+  @media (max-width: 600px) { .tv-information th, .tv-information td { padding: .7rem; } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Product information",
+  "tag": "div",
+  "settings": [],
+  "enabled_on": {"templates": ["product"]},
+  "presets": [{"name": "Product information"}]
+}
+{% endschema %}

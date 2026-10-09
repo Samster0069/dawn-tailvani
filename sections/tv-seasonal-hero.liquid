@@ -1,9 +1,3 @@
-{%- comment -%}
-  Tailvani seasonal hero: "the boutique window".
-  Split layout: copy on the left, the arch window art on the right.
-  The active seasonal skin supplies the art, heading, text, button, collection and promo.
-  When no skin is active (or a field is empty) the section's own settings are used.
-{%- endcomment -%}
 {%- capture tv_skin_handle -%}{%- render 'tv-skin-handle' -%}{%- endcapture -%}
 {%- assign tv_skin_handle = tv_skin_handle | strip -%}
 {%- if tv_skin_handle != blank -%}
@@ -57,6 +51,26 @@
   if button_link == blank and button_label != blank
     assign button_link = routes.all_products_collection_url
   endif
+  assign show_primary = true
+  assign show_secondary = true
+  if section.settings.hide_empty_collection_links
+    assign primary_path = button_link | split: '?' | first | split: '#' | first
+    assign secondary_path = link_url | split: '?' | first | split: '#' | first
+    if primary_path contains '/collections/'
+      assign primary_handle = primary_path | split: '/collections/' | last | split: '/' | first
+      assign primary_collection = collections[primary_handle]
+      if primary_collection == blank or primary_collection.all_products_count == 0
+        assign show_primary = false
+      endif
+    endif
+    if secondary_path contains '/collections/'
+      assign secondary_handle = secondary_path | split: '/collections/' | last | split: '/' | first
+      assign secondary_collection = collections[secondary_handle]
+      if secondary_collection == blank or secondary_collection.all_products_count == 0
+        assign show_secondary = false
+      endif
+    endif
+  endif
 -%}
 
 <section
@@ -76,11 +90,11 @@
         <p class="tv-hero__sub">{{ subtext | escape | newline_to_br }}</p>
       {%- endif -%}
       <div class="tv-hero__actions">
-        {%- if button_label != blank -%}
-          <a class="button button--primary" href="{{ button_link }}">{{ button_label | escape }}</a>
+        {%- if button_label != blank and show_primary -%}
+          <a class="button button--primary" href="{{ button_link | escape }}">{{ button_label | escape }}</a>
         {%- endif -%}
-        {%- if link_label != blank and link_url != blank -%}
-          <a class="tv-link" href="{{ link_url }}">{{ link_label | escape }}</a>
+        {%- if link_label != blank and link_url != blank and show_secondary -%}
+          <a class="tv-link" href="{{ link_url | escape }}">{{ link_label | escape }}</a>
         {%- endif -%}
       </div>
     </div>
@@ -126,6 +140,7 @@
     { "type": "url", "id": "button_link", "label": "Default button link" },
     { "type": "text", "id": "link_label", "label": "Secondary link label", "default": "Browse everything" },
     { "type": "url", "id": "link_url", "label": "Secondary link", "default": "/collections/all" },
+    { "type": "checkbox", "id": "hide_empty_collection_links", "label": "Hide links to empty collections", "default": true },
     { "type": "checkbox", "id": "use_skin_copy", "label": "Use the seasonal skin's heading, text and button", "default": true, "info": "Turn off to keep this section's own words while still showing the seasonal art and colors." },
     { "type": "color_scheme", "id": "color_scheme", "label": "t:sections.all.colors.label", "default": "scheme-2" }
   ],

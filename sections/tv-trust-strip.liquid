@@ -13,7 +13,7 @@
             <span class="tv-trust__title">{{ block.settings.title | escape }}</span>
             {%- if block.settings.text != blank -%}
               <span class="tv-trust__text">
-                {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}">{{ block.settings.text | escape }}</a>{%- else -%}{{ block.settings.text | escape }}{%- endif -%}
+                {%- if block.settings.link != blank -%}<a href="{{ block.settings.link | escape }}">{{ block.settings.text | escape }}</a>{%- else -%}{{ block.settings.text | escape }}{%- endif -%}
               </span>
             {%- endif -%}
           </span>

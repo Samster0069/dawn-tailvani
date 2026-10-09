@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "name": "t:sections.footer.name",
   "type": "footer",
@@ -18,7 +9,7 @@
           "type": "text",
           "settings": {
             "heading": "Tailvani",
-            "subtext": "<p>Clothing and accessories for cats, small dogs and every pet in between.</p><p>Questions? Email <a href=\"mailto:tailvaniandco@gmail.com\">tailvaniandco@gmail.com</a>. We reply within 1–2 business days.</p>"
+            "subtext": "<p>Clothing and accessories for cats, small dogs and every pet in between.</p><p>Questions? Email <a href=\"mailto:tailvaniandco@gmail.com\">tailvaniandco@gmail.com</a>.</p>"
           }
         },
         "shop": {

@@ -1,0 +1,1 @@
+{"name":"tailvani-theme-checks","private":true,"scripts":{"test":"node tools/check-storefront.cjs"},"devDependencies":{"liquidjs":"10.21.1"}}

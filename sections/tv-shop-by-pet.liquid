@@ -1,46 +1,69 @@
-{%- comment -%}
-  Tailvani "shop the window" tiles: arch-shaped links to collections.
-{%- endcomment -%}
-<section class="tv-tiles color-{{ section.settings.color_scheme }} gradient" aria-labelledby="TvTilesHeading-{{ section.id }}">
-  <div class="page-width">
-    <div class="tv-section-head">
-      <h2 id="TvTilesHeading-{{ section.id }}" class="tv-h2">{{ section.settings.heading | escape }}</h2>
-      {%- if section.settings.text != blank -%}<p class="tv-section-head__text">{{ section.settings.text | escape }}</p>{%- endif -%}
+{%- assign visible_tiles = 0 -%}
+{%- capture tiles -%}
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign coll = block.settings.collection
+      assign url = block.settings.link
+      if url == blank and coll != blank
+        assign url = coll.url
+      endif
+      assign title = block.settings.title
+      if title == blank and coll != blank
+        assign title = coll.title
+      endif
+      assign img = block.settings.image
+      if img == blank and coll != blank
+        assign img = coll.featured_image
+      endif
+      assign show_tile = true
+      if url == blank or url == '#' or title == blank
+        assign show_tile = false
+      endif
+      if section.settings.hide_empty_collections
+        if coll != blank and coll.all_products_count == 0
+          assign show_tile = false
+        endif
+        assign target_path = url | split: '?' | first | split: '#' | first
+        if block.settings.link != blank and target_path contains '/collections/'
+          assign target_handle = target_path | split: '/collections/' | last | split: '/' | first
+          assign target_collection = collections[target_handle]
+          if target_collection == blank or target_collection.all_products_count == 0
+            assign show_tile = false
+          endif
+        endif
+      endif
+    -%}
+    {%- if show_tile -%}
+      {%- assign visible_tiles = visible_tiles | plus: 1 -%}
+      <li class="tv-tile" {{ block.shopify_attributes }}>
+        <a class="tv-tile__link" href="{{ url | escape }}">
+          <span class="tv-tile__media">
+            {%- if img != blank -%}
+              {{ img | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 30vw, (min-width: 750px) 45vw, 80vw', loading: 'lazy', alt: '' }}
+            {%- else -%}
+              {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </span>
+          <span class="tv-tile__title">{{ title | escape }}</span>
+          {%- if block.settings.caption != blank -%}<span class="tv-tile__caption">{{ block.settings.caption | escape }}</span>{%- endif -%}
+        </a>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if visible_tiles > 0 -%}
+  <section class="tv-tiles color-{{ section.settings.color_scheme }} gradient" aria-labelledby="TvTilesHeading-{{ section.id }}">
+    <div class="page-width">
+      <div class="tv-section-head">
+        <h2 id="TvTilesHeading-{{ section.id }}" class="tv-h2">{{ section.settings.heading | escape }}</h2>
+        {%- if section.settings.text != blank -%}<p class="tv-section-head__text">{{ section.settings.text | escape }}</p>{%- endif -%}
+      </div>
+      <ul class="tv-tiles__grid tv-tiles__grid--{{ visible_tiles }}" role="list">{{ tiles }}</ul>
     </div>
-    <ul class="tv-tiles__grid tv-tiles__grid--{{ section.blocks.size }}" role="list">
-      {%- for block in section.blocks -%}
-        {%- liquid
-          assign coll = block.settings.collection
-          assign url = block.settings.link
-          if url == blank and coll != blank
-            assign url = coll.url
-          endif
-          assign title = block.settings.title
-          if title == blank and coll != blank
-            assign title = coll.title
-          endif
-          assign img = block.settings.image
-          if img == blank and coll != blank
-            assign img = coll.featured_image
-          endif
-        -%}
-        <li class="tv-tile" {{ block.shopify_attributes }}>
-          <a class="tv-tile__link" href="{{ url | default: '#' }}">
-            <span class="tv-tile__media">
-              {%- if img != blank -%}
-                {{ img | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 30vw, (min-width: 750px) 45vw, 80vw', loading: 'lazy', alt: '' }}
-              {%- else -%}
-                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
-              {%- endif -%}
-            </span>
-            <span class="tv-tile__title">{{ title | escape }}</span>
-            {%- if block.settings.caption != blank -%}<span class="tv-tile__caption">{{ block.settings.caption | escape }}</span>{%- endif -%}
-          </a>
-        </li>
-      {%- endfor -%}
-    </ul>
-  </div>
-</section>
+  </section>
+{%- elsif request.design_mode -%}
+  <p class="page-width tv-editor-note">{{ 'tailvani.browse.tiles_editor' | t }}</p>
+{%- endif -%}
 
 {% schema %}
 {
@@ -49,23 +72,78 @@
   "class": "section",
   "max_blocks": 4,
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Find their next favorite" },
-    { "type": "text", "id": "text", "label": "Text" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "t:sections.all.colors.label", "default": "scheme-1" }
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find their next favorite"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_empty_collections",
+      "label": "Hide empty collections",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
   ],
   "blocks": [
     {
       "type": "tile",
       "name": "Tile",
       "settings": [
-        { "type": "collection", "id": "collection", "label": "Collection" },
-        { "type": "image_picker", "id": "image", "label": "Image (uses the collection image if empty)" },
-        { "type": "text", "id": "title", "label": "Title (uses the collection title if empty)" },
-        { "type": "text", "id": "caption", "label": "Caption" },
-        { "type": "url", "id": "link", "label": "Link (uses the collection if empty)" }
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (uses the collection image if empty)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title (uses the collection title if empty)"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (uses the collection if empty)"
+        }
       ]
     }
   ],
-  "presets": [ { "name": "Tailvani shop tiles", "blocks": [ { "type": "tile" }, { "type": "tile" }, { "type": "tile" } ] } ]
+  "presets": [
+    {
+      "name": "Tailvani shop tiles",
+      "blocks": [
+        {
+          "type": "tile"
+        },
+        {
+          "type": "tile"
+        },
+        {
+          "type": "tile"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

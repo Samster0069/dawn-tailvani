@@ -23,7 +23,7 @@
     if skin.feature_text != blank
       assign text = skin.feature_text.value
     endif
-    if skin.hero_collection.value != blank and section.settings.use_skin_link
+    if skin.hero_collection.value != blank and section.settings.use_skin_link and skin.hero_collection.value.all_products_count > 0
       assign button_link = skin.hero_collection.value.url
       assign button_label = skin.hero_button_label.value | default: button_label
     endif
@@ -42,7 +42,7 @@
       <h2 id="TvFeatureHeading-{{ section.id }}" class="tv-h2">{{ heading | escape }}</h2>
       {%- if text != blank -%}<p class="tv-feature__text">{{ text | escape | newline_to_br }}</p>{%- endif -%}
       {%- if button_label != blank and button_link != blank -%}
-        <a class="button button--secondary" href="{{ button_link }}">{{ button_label | escape }}</a>
+        <a class="button button--secondary" href="{{ button_link | escape }}">{{ button_label | escape }}</a>
       {%- endif -%}
     </div>
   </div>
