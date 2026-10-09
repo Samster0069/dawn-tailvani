@@ -45,6 +45,33 @@
           "settings": {
             "share_label": "Share"
           }
+        },
+        "tv-size-fit": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Size and fit",
+            "icon": "ruler",
+            "content": "<p>Measure your pet's neck, chest and back length, then compare with the size chart in the product photos or description. Sizing varies by item. <a href=\"/pages/contact\">Contact us</a> if you're unsure which size to choose.</p><p>Please supervise your pet while they wear any Tailvani product.</p>",
+            "page": ""
+          }
+        },
+        "tv-materials-care": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Materials and care",
+            "icon": "heart",
+            "content": "<p>Materials and care instructions are listed in the description above. Contact us if anything is missing.</p>",
+            "page": ""
+          }
+        },
+        "tv-shipping-returns": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Shipping and returns",
+            "icon": "truck",
+            "content": "<p>Shipping options and charges are shown at checkout. Read our <a href=\"/policies/shipping-policy\">shipping policy</a> and <a href=\"/policies/refund-policy\">return and refund policy</a> for details.</p>",
+            "page": ""
+          }
         }
       },
       "block_order": [
@@ -55,6 +82,9 @@
         "quantity_selector",
         "buy_buttons",
         "description",
+        "tv-size-fit",
+        "tv-materials-care",
+        "tv-shipping-returns",
         "share"
       ],
       "settings": {
