@@ -1,0 +1,83 @@
+{%- comment -%}
+  Tailvani seasonal skin — color overrides + decoration overlay.
+  Accepts: skin (metaobject tailvani_season_skin). Renders nothing if blank.
+  Colors override Dawn's primary color schemes (scheme-1, scheme-2) only;
+  footer/dark schemes keep their brand colors.
+{%- endcomment -%}
+{%- if skin != blank -%}
+  {%- liquid
+    assign bg = skin.color_background.value
+    assign fg = skin.color_text.value
+    assign btn = skin.color_button.value
+    assign btn_label = skin.color_button_label.value
+    assign accent = skin.color_accent.value
+  -%}
+  <style data-tv-skin="{{ skin.system.handle }}">
+    :root, .color-scheme-1, .color-scheme-2 {
+      {%- if bg != blank %}
+      --color-background: {{ bg.red }},{{ bg.green }},{{ bg.blue }};
+      --gradient-background: {{ bg }};
+      --color-secondary-button: {{ bg.red }},{{ bg.green }},{{ bg.blue }};
+      --color-badge-background: {{ bg.red }},{{ bg.green }},{{ bg.blue }};
+      {%- endif %}
+      {%- if fg != blank %}
+      --color-foreground: {{ fg.red }},{{ fg.green }},{{ fg.blue }};
+      --color-badge-foreground: {{ fg.red }},{{ fg.green }},{{ fg.blue }};
+      {%- endif %}
+      {%- if btn != blank %}
+      --color-button: {{ btn.red }},{{ btn.green }},{{ btn.blue }};
+      {%- endif %}
+      {%- if btn_label != blank %}
+      --color-button-text: {{ btn_label.red }},{{ btn_label.green }},{{ btn_label.blue }};
+      {%- endif %}
+      {%- if accent != blank %}
+      --tv-skin-accent: {{ accent }};
+      --color-link: {{ accent.red }},{{ accent.green }},{{ accent.blue }};
+      {%- endif %}
+    }
+    .tv-skin-badge { background: var(--tv-skin-accent, rgb(var(--color-button))); color: rgb(var(--color-button-text)); }
+  </style>
+
+  {%- assign asset = skin.overlay_asset.value -%}
+  {%- assign density = skin.overlay_density.value | default: 0 | times: 1 | at_most: 30 -%}
+  {%- if asset != blank and density > 0 -%}
+    {%- if asset.media_type == 'image' -%}
+      {%- assign asset_src = asset | image_url: width: 96 -%}
+    {%- else -%}
+      {%- assign asset_src = asset.url -%}
+    {%- endif -%}
+    <style>
+      .tv-skin-overlay { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 3; }
+      .tv-skin-overlay span {
+        position: absolute; top: -8vh; width: var(--s); height: var(--s);
+        background: url("{{ asset_src }}") center / contain no-repeat;
+        left: var(--x); opacity: .55;
+        {%- if skin.overlay_motion.value == true %}
+        animation: tv-skin-fall var(--d) linear var(--delay) infinite;
+        {%- else %}
+        top: var(--y);
+        {%- endif %}
+      }
+      @keyframes tv-skin-fall {
+        0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+        100% { transform: translate3d(4vw, 118vh, 0) rotate(220deg); }
+      }
+      @media (max-width: 749px) { .tv-skin-overlay span:nth-child(even) { display: none; } }
+      @media (prefers-reduced-motion: reduce) {
+        .tv-skin-overlay span { animation: none; top: var(--y); opacity: .35; }
+      }
+    </style>
+    <div class="tv-skin-overlay" aria-hidden="true">
+      {%- for i in (1..density) -%}
+        {%- liquid
+          assign x = i | times: 37 | modulo: 100
+          assign y = i | times: 53 | modulo: 90
+          assign s = i | times: 7 | modulo: 18 | plus: 16
+          assign d = i | times: 3 | modulo: 9 | plus: 9
+          assign delay = i | times: 13 | modulo: 12
+        -%}
+        <span style="--x:{{ x }}vw;--y:{{ y }}vh;--s:{{ s }}px;--d:{{ d }}s;--delay:-{{ delay }}s"></span>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+{%- endif -%}

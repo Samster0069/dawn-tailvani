@@ -1,0 +1,43 @@
+{%- comment -%}
+  Tailvani seasonal skin resolver.
+  Outputs ONLY the handle of the active skin (or nothing). Use it like:
+    {%- capture tv_skin_handle -%}{%- render 'tv-skin-handle' -%}{%- endcapture -%}
+    {%- assign tv_skin_handle = tv_skin_handle | strip -%}
+    {%- if tv_skin_handle != blank -%}{%- assign tv_skin = metaobjects.tailvani_season_skin[tv_skin_handle] -%}{%- endif -%}
+
+  Rules (Revamp Plan v2 §5.1):
+  1. Theme settings → "Disable all seasonal skins" on → no skin.
+  2. Theme settings → "Seasonal skin override" set and enabled → that skin.
+  3. Otherwise: enabled skins where start_date <= today <= end_date; highest priority wins.
+  Dates are compared as Unix timestamps; end_date is inclusive (whole day).
+{%- endcomment -%}
+{%- liquid
+  assign result = ''
+  assign override = settings.tv_skin_override
+
+  if settings.tv_skins_disabled
+    assign result = ''
+  elsif override != blank and override.enabled.value == true
+    assign result = override.system.handle
+  else
+    assign now_ts = 'now' | date: '%s' | times: 1
+    assign best_priority = -1
+    for skin in metaobjects.tailvani_season_skin.values limit: 100
+      if skin.enabled.value != true or skin.start_date == blank or skin.end_date == blank
+        continue
+      endif
+      assign start_ts = skin.start_date.value | date: '%s' | times: 1
+      assign end_ts = skin.end_date.value | date: '%s' | times: 1 | plus: 86399
+      if now_ts < start_ts or now_ts > end_ts
+        continue
+      endif
+      assign p = skin.priority.value | default: 0 | times: 1
+      if p > best_priority
+        assign best_priority = p
+        assign result = skin.system.handle
+      endif
+    endfor
+  endif
+
+  echo result
+-%}
