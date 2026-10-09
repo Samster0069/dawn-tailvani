@@ -15,9 +15,12 @@ SS = 2                                        # supersample for smooth edges
 SLOTS = [(232, 1305, 380, -12), (1148, 318, 270, 16), (118, 600, 160, -18), (1192, 1050, 245, 8),
          (412, 1450, 170, 10), (1012, 160, 130, -10), (950, 1478, 170, -6)]
 CENTER = {  # focal point (x, y) for the arch crop, 0..1
- 'base': (0.5, 0.45), 'bfcm-2026': (0.6, 0.6), 'spring-2027': (0.42, 0.45), 'holidays-2026': (0.5, 0.3),
- 'new-year-2027': (0.5, 0.55), 'thanksgiving-2026': (0.5, 0.55), 'fourth-of-july-2027': (0.45, 0.45),
+ 'base': (0.5, 0.45), 'bfcm-2026': (0.6, 0.6), 'spring-2027': (0.5, 0.35), 'holidays-2026': (0.5, 0.5),
+ 'new-year-2027': (0.62, 0.4), 'thanksgiving-2026': (0.5, 0.4), 'fourth-of-july-2027': (0.5, 0.65),
+ 'valentines-2027': (0.5, 0.55), 'summer-2027': (0.5, 0.45), 'national-dog-day-2027': (0.5, 0.4),
 }
+
+ZOOM = {'fourth-of-july-2027': 0.58}  # crop to this fraction around the focal point before fitting
 
 def hexrgb(h, a=255):
     h = h.lstrip('#'); return tuple(int(h[i:i+2], 16) for i in (0, 2, 4)) + (a,)
@@ -44,6 +47,11 @@ def compose(skin):
     canvas.alpha_composite(ol, (AX + OFF[0], AY + OFF[1]))
     # 2. photo in the arch
     photo = Image.open(f'/home/claude/craft/artwork/graded/{skin}-photo.jpg').convert('RGB')
+    if skin in ZOOM:
+        z = ZOOM[skin]; fx, fy = CENTER.get(skin, (0.5, 0.42)); W0, H0 = photo.size
+        w, h = int(W0 * z), int(H0 * z)
+        x0 = min(max(int(fx * W0 - w / 2), 0), W0 - w); y0 = min(max(int(fy * H0 - h / 2), 0), H0 - h)
+        photo = photo.crop((x0, y0, x0 + w, y0 + h))
     photo = ImageOps.fit(photo, (AW, AH), Image.LANCZOS, centering=CENTER.get(skin, (0.5, 0.42)))
     m = arch_mask(AW, AH)
     canvas.paste(photo, (AX, AY), m)
