@@ -15,7 +15,7 @@
         "image": "shopify://shop_images/tv-hero-base.webp",
         "image_mobile": "shopify://shop_images/tv-hero-base.webp",
         "heading": "A style for every tail",
-        "subtext": "Clothing and accessories for dogs and cats, picked for comfort and made to be shown off.",
+        "subtext": "Clothing and accessories for cats and small dogs, with picks for every pet at home.",
         "button_label": "Shop new arrivals",
         "button_link": "shopify://collections/new-arrivals",
         "link_label": "Browse everything",
@@ -34,22 +34,22 @@
     "tv_tiles": {
       "type": "tv-shop-by-pet",
       "blocks": {
-        "dogs": {
-          "type": "tile",
-          "settings": {
-            "collection": "dogs",
-            "image": "shopify://shop_images/tv-tile-dogs.jpg",
-            "title": "For dogs",
-            "caption": "Sweaters, coats and walk gear"
-          }
-        },
         "cats": {
           "type": "tile",
           "settings": {
             "collection": "cats",
             "image": "shopify://shop_images/tv-tile-cats.jpg",
             "title": "For cats",
-            "caption": "Collars, bandanas and cozy picks"
+            "caption": "Collars, harnesses and cozy layers"
+          }
+        },
+        "dogs": {
+          "type": "tile",
+          "settings": {
+            "collection": "dogs",
+            "image": "shopify://shop_images/tv-tile-dogs.jpg",
+            "title": "For small dogs",
+            "caption": "Sweaters, coats and walk gear"
           }
         },
         "accessories": {
@@ -63,8 +63,8 @@
         }
       },
       "block_order": [
-        "dogs",
         "cats",
+        "dogs",
         "accessories"
       ],
       "settings": {
@@ -88,7 +88,7 @@
       "settings": {
         "image": "shopify://shop_images/tv-feature-base.jpg",
         "heading": "Made for the way they live",
-        "text": "We pick pieces that are easy to put on, comfortable to wear and fun to show off, from weekday walks to holiday photos.",
+        "text": "From cats to toy breeds and every pet in between, we pick pieces that are easy to put on, comfortable to wear and fun to show off.",
         "button_label": "Our story",
         "button_link": "/pages/about",
         "use_skin_link": true,

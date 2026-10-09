@@ -18,22 +18,22 @@
     "tv_tiles": {
       "type": "tv-shop-by-pet",
       "blocks": {
-        "dogs": {
-          "type": "tile",
-          "settings": {
-            "collection": "dogs",
-            "image": "shopify://shop_images/tv-tile-dogs.jpg",
-            "title": "For dogs",
-            "caption": "Sweaters, coats and walk gear"
-          }
-        },
         "cats": {
           "type": "tile",
           "settings": {
             "collection": "cats",
             "image": "shopify://shop_images/tv-tile-cats.jpg",
             "title": "For cats",
-            "caption": "Collars, bandanas and cozy picks"
+            "caption": "Collars, harnesses and cozy layers"
+          }
+        },
+        "dogs": {
+          "type": "tile",
+          "settings": {
+            "collection": "dogs",
+            "image": "shopify://shop_images/tv-tile-dogs.jpg",
+            "title": "For small dogs",
+            "caption": "Sweaters, coats and walk gear"
           }
         },
         "accessories": {
@@ -47,8 +47,8 @@
         }
       },
       "block_order": [
-        "dogs",
         "cats",
+        "dogs",
         "accessories"
       ],
       "settings": {
