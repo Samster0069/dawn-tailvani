@@ -12,13 +12,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {}
@@ -58,41 +51,37 @@
         },
         "collapsible-row-0": {
           "type": "collapsible_tab",
-          "disabled": true,
           "settings": {
-            "heading": "Materials",
-            "icon": "leather",
-            "content": "",
+            "heading": "Size and fit",
+            "icon": "ruler",
+            "content": "<p>Measure your pet's neck, chest and back length, then compare with the size chart in the photos or description. Between sizes? Size up for coats and sweaters.</p><p>Please supervise your pet while they wear any Tailvani product.</p>",
             "page": ""
           }
         },
         "collapsible-row-1": {
           "type": "collapsible_tab",
-          "disabled": true,
           "settings": {
-            "heading": "Shipping & Returns",
-            "icon": "truck",
-            "content": "",
+            "heading": "Materials and care",
+            "icon": "heart",
+            "content": "<p>Materials are listed in the description above. Unless the description says otherwise, hand wash cold and lay flat to dry.</p>",
             "page": ""
           }
         },
         "collapsible-row-2": {
           "type": "collapsible_tab",
-          "disabled": true,
           "settings": {
-            "heading": "Dimensions",
-            "icon": "ruler",
-            "content": "",
+            "heading": "Shipping",
+            "icon": "truck",
+            "content": "<p>Orders are packed within 1–3 business days, and delivery usually takes 7–12 business days. Shipping is free on US orders over $35.</p><p><a href=\"/policies/shipping-policy\">Shipping policy</a></p>",
             "page": ""
           }
         },
         "collapsible-row-3": {
           "type": "collapsible_tab",
-          "disabled": true,
           "settings": {
-            "heading": "Care Instructions",
-            "icon": "heart",
-            "content": "",
+            "heading": "Returns",
+            "icon": "return",
+            "content": "<p>Returns are accepted within 14 days of delivery for unused, unwashed items with their original tags. Email tailvaniandco@gmail.com to start a return.</p><p><a href=\"/policies/refund-policy\">Return and refund policy</a></p>",
             "page": ""
           }
         },
@@ -104,7 +93,6 @@
         }
       },
       "block_order": [
-        "vendor",
         "title",
         "caption",
         "price",
@@ -132,89 +120,6 @@
         "enable_video_looping": false,
         "padding_top": 36,
         "padding_bottom": 12
-      }
-    },
-    "image-with-text": {
-      "type": "image-with-text",
-      "blocks": {
-        "image-with-text-0": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image with text",
-            "heading_size": "h1"
-          }
-        },
-        "image-with-text-1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "text_style": "body"
-          }
-        }
-      },
-      "block_order": [
-        "image-with-text-0",
-        "image-with-text-1"
-      ],
-      "disabled": true,
-      "settings": {
-        "height": "small",
-        "desktop_image_width": "medium",
-        "layout": "text_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "",
-        "color_scheme": "scheme-2",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
-      "blocks": {
-        "column-0": {
-          "type": "column",
-          "disabled": true,
-          "settings": {
-            "title": "Free Shipping",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column-1": {
-          "type": "column",
-          "disabled": true,
-          "settings": {
-            "title": "Hassle-Free Exchanges",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column-0",
-        "column-1"
-      ],
-      "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 2,
-        "column_alignment": "left",
-        "background_style": "none",
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
     "related-products": {
@@ -254,12 +159,61 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "tv_trust": {
+      "type": "tv-trust-strip",
+      "blocks": {
+        "ship": {
+          "type": "fact",
+          "settings": {
+            "icon": "truck",
+            "title": "Free US shipping over $35",
+            "text": "Shipping details",
+            "link": "/policies/shipping-policy"
+          }
+        },
+        "returns": {
+          "type": "fact",
+          "settings": {
+            "icon": "return",
+            "title": "14-day returns",
+            "text": "On unused items with tags",
+            "link": "/policies/refund-policy"
+          }
+        },
+        "process": {
+          "type": "fact",
+          "settings": {
+            "icon": "box",
+            "title": "Packed in 1–3 business days",
+            "text": "Delivery in 7–12 business days"
+          }
+        },
+        "help": {
+          "type": "fact",
+          "settings": {
+            "icon": "chat-bubble",
+            "title": "Questions?",
+            "text": "We reply within 1–2 business days",
+            "link": "/pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "ship",
+        "returns",
+        "process",
+        "help"
+      ],
+      "settings": {
+        "label": "Shopping with Tailvani",
+        "color_scheme": "scheme-3"
+      }
     }
   },
   "order": [
     "main",
-    "image-with-text",
-    "multicolumn",
+    "tv_trust",
     "related-products",
     "178009758141c40095"
   ]

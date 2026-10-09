@@ -230,7 +230,9 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
-    {{ 'tailvani-polish.css' | asset_url | stylesheet_tag }}
+    {%- comment -%} Tailvani rebuild: self-hosted brand fonts + the boutique-window layer {%- endcomment -%}
+    {%- render 'tv-fonts' -%}
+    {{ 'tv-rebuild.css' | asset_url | stylesheet_tag }}
 
     {%- comment -%} Tailvani seasonal skin layer (Revamp Plan v2 §5) {%- endcomment -%}
     {%- capture tv_skin_handle -%}{%- render 'tv-skin-handle' -%}{%- endcapture -%}

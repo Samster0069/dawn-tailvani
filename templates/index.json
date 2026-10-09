@@ -1,179 +1,156 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "mobile_story_banner": {
-      "type": "custom-liquid",
+    "tv_hero": {
+      "type": "tv-seasonal-hero",
       "settings": {
-        "custom_liquid": "<section style='max-width:900px;margin:0 auto;padding:32px 20px;background:#F6EFE5;text-align:center'><picture><source media='(max-width: 749px)' srcset='{{ \"Long_Banner_1.png\" | asset_url }}'><img src='{{ \"logo_favicon_square.png\" | asset_url }}' alt='Tailvani brand graphic' style='width:100%;max-width:420px;margin:0 auto;display:block;border-radius:28px;box-shadow:0 12px 30px rgba(47,53,38,.08)'></picture></section>",
-        "color_scheme": "scheme-2",
-        "padding_top": 0,
-        "padding_bottom": 0
+        "image": "shopify://shop_images/tv-hero-base.webp",
+        "image_mobile": "shopify://shop_images/tv-hero-base.webp",
+        "heading": "A style for every tail",
+        "subtext": "Clothing and accessories for dogs and cats, picked for comfort and made to be shown off.",
+        "button_label": "Shop new arrivals",
+        "button_link": "shopify://collections/new-arrivals",
+        "link_label": "Browse everything",
+        "link_url": "shopify://collections/all",
+        "color_scheme": "scheme-2"
       }
     },
-    "rich_text": {
-      "type": "rich-text",
+    "tv_garland": {
+      "type": "tv-garland",
+      "settings": {
+        "icon": "sprig",
+        "size": 24,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "tv_tiles": {
+      "type": "tv-shop-by-pet",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "dogs": {
+          "type": "tile",
           "settings": {
-            "heading": "Boutique pet lifestyle essentials",
-            "heading_size": "h1"
+            "collection": "dogs",
+            "image": "shopify://shop_images/tv-tile-dogs.jpg",
+            "title": "For dogs",
+            "caption": "Sweaters, coats and walk gear"
           }
         },
-        "text": {
-          "type": "text",
+        "cats": {
+          "type": "tile",
           "settings": {
-            "text": "<p>Thoughtful products for modern pet parents and every tail they love. Warm, minimal, comfortable, and made to grow with dogs, cats, and future pet lifestyle essentials.</p>"
+            "collection": "cats",
+            "image": "shopify://shop_images/tv-tile-cats.jpg",
+            "title": "For cats",
+            "caption": "Collars, bandanas and cozy picks"
+          }
+        },
+        "accessories": {
+          "type": "tile",
+          "settings": {
+            "collection": "accessories",
+            "image": "shopify://shop_images/tv-tile-accessories.jpg",
+            "title": "Walk and play",
+            "caption": "Harnesses, leashes and toys"
           }
         }
       },
       "block_order": [
-        "heading",
-        "text"
+        "dogs",
+        "cats",
+        "accessories"
       ],
       "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-2",
-        "full_width": true,
-        "padding_top": 52,
-        "padding_bottom": 24
+        "heading": "Find their next favorite",
+        "text": "",
+        "color_scheme": "scheme-1"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "tv_products": {
+      "type": "tv-seasonal-products",
       "settings": {
-        "collection": "all",
+        "heading": "New arrivals",
+        "collection": "new-arrivals",
         "products_to_show": 8,
-        "title": "Featured Tailvani™ picks",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 20,
-        "padding_bottom": 56
+        "view_all_label": "Shop the collection",
+        "color_scheme": "scheme-1"
       }
     },
-    "dog_lifestyle": {
-      "type": "custom-liquid",
+    "tv_feature": {
+      "type": "tv-feature-band",
       "settings": {
-        "custom_liquid": "<style>.tv-dog-feature{max-width:1400px;margin:0 auto;padding:40px 24px}.tv-dog-card{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;background:#FDFAF5;border-radius:32px;overflow:hidden;box-shadow:0 12px 30px rgba(47,53,38,.06)}.tv-dog-media{height:100%;min-height:420px}.tv-dog-media img{width:100%;height:100%;object-fit:cover;display:block}.tv-dog-copy{padding:36px}.tv-dog-copy h2{font-size:clamp(2.4rem,4vw,4.8rem);margin:0 0 18px;color:#2F3526}.tv-dog-copy p{font-size:1.7rem;line-height:1.8;color:#2F3526;margin:0}@media(max-width:749px){.tv-dog-feature{padding:28px 18px}.tv-dog-card{display:block;border-radius:24px}.tv-dog-media{height:auto;min-height:0}.tv-dog-media img{height:auto;object-fit:contain}.tv-dog-copy{padding:24px 22px 28px}.tv-dog-copy h2{font-size:3rem;line-height:1.05}.tv-dog-copy p{font-size:1.45rem;line-height:1.65}}</style><section class='tv-dog-feature'><div class='tv-dog-card'><div class='tv-dog-media'><img src='{{ \"dog_sky_background.webp\" | asset_url }}' alt='Tailvani dog lifestyle'></div><div class='tv-dog-copy'><h2>Style For Every Tail</h2><p>Tailvani™ blends boutique pet fashion with everyday comfort for modern pet parents. Designed for dogs, cats, and every tail in between.</p></div></div></section>",
-        "color_scheme": "scheme-1",
-        "padding_top": 0,
-        "padding_bottom": 0
+        "image": "shopify://shop_images/tv-feature-base.jpg",
+        "heading": "Made for the way they live",
+        "text": "We pick pieces that are easy to put on, comfortable to wear and fun to show off, from weekday walks to holiday photos.",
+        "button_label": "Our story",
+        "button_link": "/pages/about",
+        "use_skin_link": true,
+        "image_right": false,
+        "color_scheme": "scheme-3"
       }
     },
-    "pet_gallery": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<section style='padding:20px 24px 56px;background:#F6EFE5'><div style='display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1200px;margin:0 auto'><img src='{{ \"happy_dog.jpg\" | asset_url }}' alt='Happy Tailvani dog' style='width:100%;border-radius:28px;display:block;object-fit:cover;box-shadow:0 12px 30px rgba(47,53,38,.08);'/><img src='{{ \"lying_cat.jpg\" | asset_url }}' alt='Tailvani cat lifestyle' style='width:100%;border-radius:28px;display:block;object-fit:cover;box-shadow:0 12px 30px rgba(47,53,38,.08);'/></div></section>",
-        "color_scheme": "scheme-1",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
+    "tv_trust": {
+      "type": "tv-trust-strip",
       "blocks": {
-        "column1": {
-          "type": "column",
+        "ship": {
+          "type": "fact",
           "settings": {
-            "title": "Thoughtful Design",
-            "text": "<p>Warm boutique-inspired essentials designed for everyday pet life.</p>",
-            "link_label": "Shop now",
-            "link": "shopify://collections/all"
+            "icon": "truck",
+            "title": "Free US shipping over $35",
+            "text": "Shipping details",
+            "link": "/policies/shipping-policy"
           }
         },
-        "column2": {
-          "type": "column",
+        "returns": {
+          "type": "fact",
           "settings": {
-            "title": "For Dogs & Cats",
-            "text": "<p>Built for the modern pet parent because every tail deserves style.</p>",
-            "link_label": "Browse collections",
-            "link": "shopify://collections/all"
+            "icon": "return",
+            "title": "14-day returns",
+            "text": "On unused items with tags",
+            "link": "/policies/refund-policy"
           }
         },
-        "column3": {
-          "type": "column",
+        "process": {
+          "type": "fact",
           "settings": {
-            "title": "Comfort First",
-            "text": "<p>Minimal, comfortable, and carefully curated with pets in mind.</p>",
-            "link_label": "Shop essentials",
-            "link": "shopify://collections/all"
+            "icon": "box",
+            "title": "Packed in 1–3 business days",
+            "text": "Delivery in 7–12 business days"
+          }
+        },
+        "help": {
+          "type": "fact",
+          "settings": {
+            "icon": "chat-bubble",
+            "title": "Real people, quick replies",
+            "text": "We answer within 1–2 business days",
+            "link": "/pages/contact"
           }
         }
       },
       "block_order": [
-        "column1",
-        "column2",
-        "column3"
+        "ship",
+        "returns",
+        "process",
+        "help"
       ],
       "settings": {
-        "title": "Style For Every Tail",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "button_label": "Shop Tailvani™",
-        "button_link": "shopify://collections/all",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "primary",
-        "color_scheme": "scheme-2",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 48,
-        "padding_bottom": 64
+        "label": "Shopping with Tailvani",
+        "color_scheme": "scheme-1"
       }
     },
-    "17798429402547eef1": {
+    "apps": {
       "type": "apps",
       "settings": {
         "include_margins": true
       }
-    },
-    "tv_seasonal_hero": {
-      "type": "tv-seasonal-hero",
-      "settings": {
-        "fallback_asset": "wide_banner.png",
-        "heading": "",
-        "subtext": "",
-        "button_label": "Shop the collection",
-        "button_link": "shopify://collections/all",
-        "heading_size": "h1",
-        "color_scheme": "scheme-1"
-      }
     }
   },
   "order": [
-    "tv_seasonal_hero",
-    "mobile_story_banner",
-    "rich_text",
-    "featured_collection",
-    "dog_lifestyle",
-    "pet_gallery",
-    "multicolumn",
-    "17798429402547eef1"
+    "tv_hero",
+    "tv_garland",
+    "tv_tiles",
+    "tv_products",
+    "tv_feature",
+    "tv_trust",
+    "apps"
   ]
 }

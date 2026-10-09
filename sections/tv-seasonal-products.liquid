@@ -1,0 +1,66 @@
+{%- comment -%}
+  Tailvani seasonal products: shows the active skin's featured collection,
+  or this section's own collection when no skin is active. Hidden when empty.
+{%- endcomment -%}
+{%- capture tv_skin_handle -%}{%- render 'tv-skin-handle' -%}{%- endcapture -%}
+{%- assign tv_skin_handle = tv_skin_handle | strip -%}
+{%- if tv_skin_handle != blank -%}
+  {%- assign skin = metaobjects.tailvani_season_skin[tv_skin_handle] -%}
+{%- endif -%}
+{%- liquid
+  assign coll = section.settings.collection
+  assign heading = section.settings.heading
+  if skin != blank and skin.hero_collection.value != blank
+    assign coll = skin.hero_collection.value
+    assign heading = coll.title
+  endif
+  assign limit = section.settings.products_to_show
+-%}
+{%- if coll != blank and coll.products_count > 0 -%}
+  {{ 'component-card.css' | asset_url | stylesheet_tag }}
+  {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  <section class="tv-products color-{{ section.settings.color_scheme }} gradient" aria-labelledby="TvProductsHeading-{{ section.id }}">
+    <div class="page-width">
+      <div class="tv-section-head tv-section-head--split">
+        <h2 id="TvProductsHeading-{{ section.id }}" class="tv-h2">{{ heading | escape }}</h2>
+        <a class="tv-link" href="{{ coll.url }}">{{ section.settings.view_all_label | escape }}</a>
+      </div>
+      <ul class="grid product-grid grid--2-col-tablet-down grid--4-col-desktop tv-products__grid" role="list">
+        {%- for product in coll.products limit: limit -%}
+          <li class="grid__item">
+            {% render 'card-product',
+              card_product: product,
+              media_aspect_ratio: 'portrait',
+              image_shape: 'default',
+              show_secondary_image: true,
+              show_vendor: false,
+              show_rating: true,
+              section_id: section.id
+            %}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+{%- elsif request.design_mode -%}
+  <div class="page-width tv-editor-note">
+    <p>Tailvani seasonal products: the selected collection has no published products yet, so this section is hidden on the storefront.</p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Seasonal products",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "paragraph", "content": "Shows the active seasonal skin's featured collection. With no skin active, it shows the collection below." },
+    { "type": "text", "id": "heading", "label": "Default heading", "default": "New arrivals" },
+    { "type": "collection", "id": "collection", "label": "Default collection" },
+    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 4, "max": 12, "step": 4, "default": 8 },
+    { "type": "text", "id": "view_all_label", "label": "View all link label", "default": "Shop the collection" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "t:sections.all.colors.label", "default": "scheme-1" }
+  ],
+  "presets": [ { "name": "Seasonal products" } ]
+}
+{% endschema %}

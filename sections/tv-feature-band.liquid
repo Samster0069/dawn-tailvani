@@ -1,0 +1,69 @@
+{%- comment -%}
+  Tailvani feature band: photo + short story on the secondary band colour.
+  The active skin supplies the photo, heading and text.
+{%- endcomment -%}
+{%- capture tv_skin_handle -%}{%- render 'tv-skin-handle' -%}{%- endcapture -%}
+{%- assign tv_skin_handle = tv_skin_handle | strip -%}
+{%- if tv_skin_handle != blank -%}
+  {%- assign skin = metaobjects.tailvani_season_skin[tv_skin_handle] -%}
+{%- endif -%}
+{%- liquid
+  assign img = section.settings.image
+  assign heading = section.settings.heading
+  assign text = section.settings.text
+  assign button_label = section.settings.button_label
+  assign button_link = section.settings.button_link
+  if skin != blank
+    if skin.feature_image.value != blank
+      assign img = skin.feature_image.value
+    endif
+    if skin.feature_heading != blank
+      assign heading = skin.feature_heading.value
+    endif
+    if skin.feature_text != blank
+      assign text = skin.feature_text.value
+    endif
+    if skin.hero_collection.value != blank and section.settings.use_skin_link
+      assign button_link = skin.hero_collection.value.url
+      assign button_label = skin.hero_button_label.value | default: button_label
+    endif
+  endif
+-%}
+<section class="tv-feature color-{{ section.settings.color_scheme }} gradient" aria-labelledby="TvFeatureHeading-{{ section.id }}">
+  <div class="page-width tv-feature__grid{% if section.settings.image_right %} tv-feature__grid--flip{% endif %}">
+    <div class="tv-feature__media">
+      {%- if img != blank -%}
+        {{ img | image_url: width: 1600 | image_tag: widths: '500, 800, 1100, 1400, 1600', sizes: '(min-width: 750px) 50vw, 92vw', loading: 'lazy', alt: img.alt }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+    <div class="tv-feature__copy">
+      <h2 id="TvFeatureHeading-{{ section.id }}" class="tv-h2">{{ heading | escape }}</h2>
+      {%- if text != blank -%}<p class="tv-feature__text">{{ text | escape | newline_to_br }}</p>{%- endif -%}
+      {%- if button_label != blank and button_link != blank -%}
+        <a class="button button--secondary" href="{{ button_link }}">{{ button_label | escape }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Tailvani feature band",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "paragraph", "content": "When a seasonal skin is active, its feature photo, heading and text replace the defaults." },
+    { "type": "image_picker", "id": "image", "label": "Default photo" },
+    { "type": "text", "id": "heading", "label": "Default heading", "default": "Made for the way they live" },
+    { "type": "textarea", "id": "text", "label": "Default text", "default": "We pick pieces that are easy to put on, comfortable to wear and fun to show off, from weekday walks to holiday photos." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Our story" },
+    { "type": "url", "id": "button_link", "label": "Button link", "default": "/pages/about" },
+    { "type": "checkbox", "id": "use_skin_link", "label": "Point the button at the skin's collection", "default": true },
+    { "type": "checkbox", "id": "image_right", "label": "Photo on the right", "default": false },
+    { "type": "color_scheme", "id": "color_scheme", "label": "t:sections.all.colors.label", "default": "scheme-3" }
+  ],
+  "presets": [ { "name": "Tailvani feature band" } ]
+}
+{% endschema %}

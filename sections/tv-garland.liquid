@@ -1,0 +1,44 @@
+{%- comment -%}
+  Tailvani garland divider: a row of the active skin's decoration icon.
+  Falls back to the section's own icon (default: sage sprig, from the logo).
+{%- endcomment -%}
+{%- capture tv_skin_handle -%}{%- render 'tv-skin-handle' -%}{%- endcapture -%}
+{%- assign tv_skin_handle = tv_skin_handle | strip -%}
+{%- if tv_skin_handle != blank -%}
+  {%- assign skin = metaobjects.tailvani_season_skin[tv_skin_handle] -%}
+{%- endif -%}
+{%- liquid
+  assign icon = section.settings.icon
+  if skin != blank and skin.overlay_theme_asset != blank
+    assign icon = skin.overlay_theme_asset.value
+  endif
+  assign icon_file = 'tv-overlay-' | append: icon | append: '.svg'
+-%}
+<div
+  class="tv-garland color-{{ section.settings.color_scheme }} gradient"
+  style="--tv-garland-icon: url('{{ icon_file | asset_url }}'); --tv-garland-size: {{ section.settings.size }}px;"
+  aria-hidden="true"
+>
+  <div class="page-width"><div class="tv-garland__row">{%- for i in (1..9) -%}<span></span>{%- endfor -%}</div></div>
+</div>
+
+{% schema %}
+{
+  "name": "Tailvani garland",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "paragraph", "content": "A decorative row that changes with the seasonal skin." },
+    {
+      "type": "select", "id": "icon", "label": "Default icon", "default": "sprig",
+      "options": [
+        { "value": "sprig", "label": "Sprig" }, { "value": "paw", "label": "Paw" }, { "value": "heart", "label": "Heart" },
+        { "value": "leaf", "label": "Leaf" }, { "value": "star", "label": "Star" }, { "value": "petal", "label": "Petal" }
+      ]
+    },
+    { "type": "range", "id": "size", "label": "Icon size", "min": 16, "max": 40, "step": 2, "unit": "px", "default": 24 },
+    { "type": "color_scheme", "id": "color_scheme", "label": "t:sections.all.colors.label", "default": "scheme-1" }
+  ],
+  "presets": [ { "name": "Tailvani garland" } ]
+}
+{% endschema %}

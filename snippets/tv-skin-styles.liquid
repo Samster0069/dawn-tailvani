@@ -1,92 +1,132 @@
 {%- comment -%}
-  Tailvani seasonal skin — color overrides + decoration overlay.
-  Accepts: skin (metaobject tailvani_season_skin), part ('css' in <head>, 'overlay' right after <body>).
-  Renders nothing if skin is blank.
-  Colors override Dawn's primary color schemes (scheme-1, scheme-2) only;
-  footer/dark schemes keep their brand colors.
+  Tailvani seasonal skin: colors for every band + falling decoration overlay.
+  Params: skin (metaobject tailvani_season_skin), part ('css' in <head> | 'overlay' after <body>).
+
+  Band mapping (rebuild, Oct 2026):
+    scheme-1 Page      -> text + buttons follow the skin, ground stays milk
+    scheme-2 Hero band -> color_background
+    scheme-3 Band      -> color_band
+    scheme-4 Ink band  -> color_dark (announcement, newsletter, footer); light text = color_button_label
+    --tv-accent        -> color_accent (decorations, underlines, focus ring, garland tint)
 {%- endcomment -%}
-{%- if skin != blank and part != 'overlay' -%}
+{%- if skin != blank -%}
   {%- liquid
-    assign bg = skin.color_background.value
+    assign hero = skin.color_background.value
+    assign band = skin.color_band.value
+    assign dark = skin.color_dark.value
     assign fg = skin.color_text.value
     assign btn = skin.color_button.value
     assign btn_label = skin.color_button_label.value
     assign accent = skin.color_accent.value
   -%}
-  <style data-tv-skin="{{ skin.system.handle }}">
-    :root, .color-scheme-1, .color-scheme-2 {
-      {%- if bg != blank %}
-      --color-background: {{ bg.red }},{{ bg.green }},{{ bg.blue }};
-      --gradient-background: {{ bg }};
-      --color-secondary-button: {{ bg.red }},{{ bg.green }},{{ bg.blue }};
-      --color-badge-background: {{ bg.red }},{{ bg.green }},{{ bg.blue }};
-      {%- endif %}
-      {%- if fg != blank %}
-      --color-foreground: {{ fg.red }},{{ fg.green }},{{ fg.blue }};
-      --color-badge-foreground: {{ fg.red }},{{ fg.green }},{{ fg.blue }};
-      {%- endif %}
-      {%- if btn != blank %}
-      --color-button: {{ btn.red }},{{ btn.green }},{{ btn.blue }};
-      {%- endif %}
-      {%- if btn_label != blank %}
-      --color-button-text: {{ btn_label.red }},{{ btn_label.green }},{{ btn_label.blue }};
-      {%- endif %}
-      {%- if accent != blank %}
-      --tv-skin-accent: {{ accent }};
-      --color-link: {{ accent.red }},{{ accent.green }},{{ accent.blue }};
-      {%- endif %}
-    }
-    .tv-skin-badge { background: var(--tv-skin-accent, rgb(var(--color-button))); color: rgb(var(--color-button-text)); }
-  </style>
-{%- endif -%}
-
-{%- if skin != blank and part == 'overlay' -%}
-  {%- assign asset = skin.overlay_asset.value -%}
-  {%- assign theme_asset = skin.overlay_theme_asset.value -%}
-  {%- assign density = skin.overlay_density.value | default: 0 | times: 1 | at_most: 30 -%}
-  {%- assign asset_src = '' -%}
-  {%- if asset != blank -%}
-    {%- if asset.media_type == 'image' -%}
-      {%- assign asset_src = asset | image_url: width: 96 -%}
-    {%- else -%}
-      {%- assign asset_src = asset.url -%}
-    {%- endif -%}
-  {%- elsif theme_asset != blank -%}
-    {%- assign asset_src = 'tv-overlay-' | append: theme_asset | append: '.svg' | asset_url -%}
-  {%- endif -%}
-  {%- if asset_src != blank and density > 0 -%}
-    <style>
-      .tv-skin-overlay { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 3; }
-      .tv-skin-overlay span {
-        position: absolute; top: -8vh; width: var(--s); height: var(--s);
-        background: url("{{ asset_src }}") center / contain no-repeat;
-        left: var(--x); opacity: .55;
-        {%- if skin.overlay_motion.value == true %}
-        animation: tv-skin-fall var(--d) linear var(--delay) infinite;
-        {%- else %}
-        top: var(--y);
+  {%- if part == 'css' -%}
+    <style data-tv-skin="{{ skin.system.handle }}">
+      :root, .color-scheme-1, .color-scheme-2, .color-scheme-3 {
+        {%- if fg != blank %}
+        --color-foreground: {{ fg.red }},{{ fg.green }},{{ fg.blue }};
+        --color-badge-foreground: {{ fg.red }},{{ fg.green }},{{ fg.blue }};
+        --color-badge-border: {{ fg.red }},{{ fg.green }},{{ fg.blue }};
+        --color-secondary-button-text: {{ fg.red }},{{ fg.green }},{{ fg.blue }};
+        --color-link: {{ fg.red }},{{ fg.green }},{{ fg.blue }};
+        {%- endif %}
+        {%- if btn != blank %}
+        --color-button: {{ btn.red }},{{ btn.green }},{{ btn.blue }};
+        {%- endif %}
+        {%- if btn_label != blank %}
+        --color-button-text: {{ btn_label.red }},{{ btn_label.green }},{{ btn_label.blue }};
         {%- endif %}
       }
-      @keyframes tv-skin-fall {
-        0% { transform: translate3d(0, 0, 0) rotate(0deg); }
-        100% { transform: translate3d(4vw, 118vh, 0) rotate(220deg); }
+      {%- if hero != blank %}
+      .color-scheme-2 {
+        --color-background: {{ hero.red }},{{ hero.green }},{{ hero.blue }};
+        --gradient-background: {{ hero }};
+        --color-secondary-button: {{ hero.red }},{{ hero.green }},{{ hero.blue }};
+        --color-badge-background: {{ hero.red }},{{ hero.green }},{{ hero.blue }};
       }
-      @media (max-width: 749px) { .tv-skin-overlay span:nth-child(even) { display: none; } }
-      @media (prefers-reduced-motion: reduce) {
-        .tv-skin-overlay span { animation: none; top: var(--y); opacity: .35; }
+      {%- endif %}
+      {%- if band != blank %}
+      .color-scheme-3 {
+        --color-background: {{ band.red }},{{ band.green }},{{ band.blue }};
+        --gradient-background: {{ band }};
+        --color-secondary-button: {{ band.red }},{{ band.green }},{{ band.blue }};
+        --color-badge-background: {{ band.red }},{{ band.green }},{{ band.blue }};
+      }
+      {%- endif %}
+      {%- if dark != blank and btn_label != blank %}
+      .color-scheme-4 {
+        --color-background: {{ dark.red }},{{ dark.green }},{{ dark.blue }};
+        --gradient-background: {{ dark }};
+        --color-foreground: {{ btn_label.red }},{{ btn_label.green }},{{ btn_label.blue }};
+        --color-button: {{ btn_label.red }},{{ btn_label.green }},{{ btn_label.blue }};
+        --color-button-text: {{ dark.red }},{{ dark.green }},{{ dark.blue }};
+        --color-secondary-button: {{ dark.red }},{{ dark.green }},{{ dark.blue }};
+        --color-secondary-button-text: {{ btn_label.red }},{{ btn_label.green }},{{ btn_label.blue }};
+        --color-link: {{ btn_label.red }},{{ btn_label.green }},{{ btn_label.blue }};
+        --color-badge-foreground: {{ btn_label.red }},{{ btn_label.green }},{{ btn_label.blue }};
+        --color-badge-background: {{ dark.red }},{{ dark.green }},{{ dark.blue }};
+      }
+      {%- endif %}
+      :root {
+        {%- if accent != blank %}--tv-accent: {{ accent }};{% endif %}
+        {%- if dark != blank %}--tv-ink: {{ dark }};{% endif %}
+        {%- if hero != blank %}--tv-hero: {{ hero }};{% endif %}
+        {%- if band != blank %}--tv-band: {{ band }};{% endif %}
+      }
+      .tv-skin-badge {
+        background: rgb(var(--color-button));
+        color: rgb(var(--color-button-text));
+        border-color: transparent;
       }
     </style>
-    <div class="tv-skin-overlay" aria-hidden="true">
-      {%- for i in (1..density) -%}
-        {%- liquid
-          assign x = i | times: 37 | modulo: 100
-          assign y = i | times: 53 | modulo: 90
-          assign s = i | times: 7 | modulo: 18 | plus: 16
-          assign d = i | times: 3 | modulo: 9 | plus: 9
-          assign delay = i | times: 13 | modulo: 12
-        -%}
-        <span style="--x:{{ x }}vw;--y:{{ y }}vh;--s:{{ s }}px;--d:{{ d }}s;--delay:-{{ delay }}s"></span>
-      {%- endfor -%}
-    </div>
+  {%- elsif part == 'overlay' -%}
+    {%- liquid
+      assign density = skin.overlay_density.value | default: 0 | times: 1 | at_most: 30
+      assign asset = skin.overlay_asset.value
+      assign asset_src = ''
+      if asset != blank
+        if asset.media_type == 'image'
+          assign asset_src = asset | image_url: width: 96
+        else
+          assign asset_src = asset.url
+        endif
+      elsif skin.overlay_theme_asset != blank
+        assign asset_file = 'tv-overlay-' | append: skin.overlay_theme_asset.value | append: '.svg'
+        assign asset_src = asset_file | asset_url
+      endif
+    -%}
+    {%- if asset_src != blank and density > 0 -%}
+      <style>
+        .tv-skin-overlay { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 3; }
+        .tv-skin-overlay span {
+          position: absolute; top: -8vh; left: var(--x); width: var(--s); height: var(--s);
+          background: url("{{ asset_src }}") center / contain no-repeat; opacity: .5;
+          {%- if skin.overlay_motion.value == true %}
+          animation: tv-skin-fall var(--d) linear var(--delay) infinite;
+          {%- else %}
+          top: var(--y);
+          {%- endif %}
+        }
+        @keyframes tv-skin-fall {
+          0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+          100% { transform: translate3d(4vw, 118vh, 0) rotate(220deg); }
+        }
+        @media (max-width: 749px) { .tv-skin-overlay span:nth-child(even) { display: none; } }
+        @media (prefers-reduced-motion: reduce) {
+          .tv-skin-overlay span { animation: none; top: var(--y); opacity: .3; }
+        }
+      </style>
+      <div class="tv-skin-overlay" aria-hidden="true">
+        {%- for i in (1..density) -%}
+          {%- liquid
+            assign x = i | times: 37 | modulo: 100
+            assign y = i | times: 53 | modulo: 90
+            assign s = i | times: 7 | modulo: 16 | plus: 14
+            assign d = i | times: 3 | modulo: 9 | plus: 10
+            assign delay = i | times: 13 | modulo: 12
+          -%}
+          <span style="--x:{{ x }}vw;--y:{{ y }}vh;--s:{{ s }}px;--d:{{ d }}s;--delay:-{{ delay }}s"></span>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   {%- endif -%}
 {%- endif -%}

@@ -1,0 +1,57 @@
+{%- comment -%}
+  Tailvani trust strip: short, policy-true facts. Keep each block in line with
+  the live Shipping and Refund policies.
+{%- endcomment -%}
+<section class="tv-trust color-{{ section.settings.color_scheme }} gradient" aria-label="{{ section.settings.label | escape }}">
+  <div class="page-width">
+    <ul class="tv-trust__list" role="list">
+      {%- for block in section.blocks -%}
+        <li class="tv-trust__item" {{ block.shopify_attributes }}>
+          {%- assign icon_file = 'icon-' | append: block.settings.icon | append: '.svg' -%}
+          <span class="tv-trust__icon" aria-hidden="true">{{ icon_file | inline_asset_content }}</span>
+          <span class="tv-trust__copy">
+            <span class="tv-trust__title">{{ block.settings.title | escape }}</span>
+            {%- if block.settings.text != blank -%}
+              <span class="tv-trust__text">
+                {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}">{{ block.settings.text | escape }}</a>{%- else -%}{{ block.settings.text | escape }}{%- endif -%}
+              </span>
+            {%- endif -%}
+          </span>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Tailvani trust strip",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "label", "label": "Accessible label", "default": "Shopping with Tailvani" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "t:sections.all.colors.label", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "Fact",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "truck",
+          "options": [
+            { "value": "truck", "label": "Truck" }, { "value": "return", "label": "Return" }, { "value": "box", "label": "Box" },
+            { "value": "chat-bubble", "label": "Chat" }, { "value": "lock", "label": "Lock" }, { "value": "paw-print", "label": "Paw" },
+            { "value": "heart", "label": "Heart" }, { "value": "price-tag", "label": "Price tag" }
+          ]
+        },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "text", "label": "Text" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Tailvani trust strip" } ]
+}
+{% endschema %}
