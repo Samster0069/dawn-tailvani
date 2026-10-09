@@ -1,10 +1,11 @@
 {%- comment -%}
   Tailvani seasonal skin — color overrides + decoration overlay.
-  Accepts: skin (metaobject tailvani_season_skin). Renders nothing if blank.
+  Accepts: skin (metaobject tailvani_season_skin), part ('css' in <head>, 'overlay' right after <body>).
+  Renders nothing if skin is blank.
   Colors override Dawn's primary color schemes (scheme-1, scheme-2) only;
   footer/dark schemes keep their brand colors.
 {%- endcomment -%}
-{%- if skin != blank -%}
+{%- if skin != blank and part != 'overlay' -%}
   {%- liquid
     assign bg = skin.color_background.value
     assign fg = skin.color_text.value
@@ -37,7 +38,9 @@
     }
     .tv-skin-badge { background: var(--tv-skin-accent, rgb(var(--color-button))); color: rgb(var(--color-button-text)); }
   </style>
+{%- endif -%}
 
+{%- if skin != blank and part == 'overlay' -%}
   {%- assign asset = skin.overlay_asset.value -%}
   {%- assign density = skin.overlay_density.value | default: 0 | times: 1 | at_most: 30 -%}
   {%- if asset != blank and density > 0 -%}

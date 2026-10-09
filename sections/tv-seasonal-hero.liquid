@@ -1,0 +1,129 @@
+{%- comment -%}
+  Tailvani seasonal hero (Revamp Plan v2 §5).
+  Shows the active seasonal skin's hero. When no skin is active (or a field is
+  empty) it falls back to this section's own settings, so the homepage never breaks.
+{%- endcomment -%}
+{%- capture tv_skin_handle -%}{%- render 'tv-skin-handle' -%}{%- endcapture -%}
+{%- assign tv_skin_handle = tv_skin_handle | strip -%}
+{%- if tv_skin_handle != blank -%}
+  {%- assign skin = metaobjects.tailvani_season_skin[tv_skin_handle] -%}
+{%- endif -%}
+
+{%- liquid
+  assign img_desktop = section.settings.image
+  assign img_mobile = section.settings.image_mobile
+  assign heading = section.settings.heading
+  assign subtext = section.settings.subtext
+  assign button_label = section.settings.button_label
+  assign button_link = section.settings.button_link
+  assign promo_label = ''
+  assign promo_code = ''
+
+  if skin != blank
+    if skin.hero_image_desktop.value != blank
+      assign img_desktop = skin.hero_image_desktop.value
+    endif
+    if skin.hero_image_mobile.value != blank
+      assign img_mobile = skin.hero_image_mobile.value
+    endif
+    if skin.hero_heading != blank
+      assign heading = skin.hero_heading.value
+    endif
+    if skin.hero_subtext != blank
+      assign subtext = skin.hero_subtext.value
+    endif
+    if skin.hero_button_label != blank
+      assign button_label = skin.hero_button_label.value
+    endif
+    if skin.hero_collection.value != blank
+      assign button_link = skin.hero_collection.value.url
+    endif
+    if skin.promo_label != blank
+      assign promo_label = skin.promo_label.value
+    endif
+    if skin.promo_code != blank
+      assign promo_code = skin.promo_code.value
+    endif
+  endif
+
+  if img_mobile == blank
+    assign img_mobile = img_desktop
+  endif
+-%}
+
+<style>
+  .tv-hero-{{ section.id }} { position: relative; overflow: hidden; background: rgb(var(--color-background)); }
+  .tv-hero-{{ section.id }} .tv-hero__media img { display: block; width: 100%; height: auto; }
+  .tv-hero-{{ section.id }} .tv-hero__media--mobile { display: none; }
+  .tv-hero-{{ section.id }} .tv-hero__content {
+    max-width: 72rem; margin: 0 auto; padding: 3.2rem 2rem 4rem; text-align: center;
+  }
+  .tv-hero-{{ section.id }} .tv-hero__heading { margin: 0 0 1.2rem; }
+  .tv-hero-{{ section.id }} .tv-hero__sub { margin: 0 auto 2rem; max-width: 56rem; }
+  .tv-hero-{{ section.id }} .tv-hero__promo {
+    display: inline-block; margin: 0 0 1.6rem; padding: .6rem 1.4rem; border-radius: 999px;
+    background: var(--tv-skin-accent, rgba(var(--color-foreground), .08)); color: rgb(var(--color-foreground));
+    font-size: 1.4rem; letter-spacing: .04em;
+  }
+  @media screen and (max-width: 749px) {
+    .tv-hero-{{ section.id }} .tv-hero__media--desktop { display: none; }
+    .tv-hero-{{ section.id }} .tv-hero__media--mobile { display: block; }
+    .tv-hero-{{ section.id }} .tv-hero__content { padding: 2.4rem 1.6rem 3.2rem; }
+  }
+</style>
+
+<section class="tv-hero tv-hero-{{ section.id }} color-{{ section.settings.color_scheme }} gradient" data-tv-skin="{{ tv_skin_handle }}">
+  {%- if img_desktop == blank and section.settings.fallback_asset != blank -%}
+    <div class="tv-hero__media">
+      <img src="{{ section.settings.fallback_asset | asset_url }}" alt="{{ heading | escape }}" width="2400" height="800" loading="eager" fetchpriority="high">
+    </div>
+  {%- elsif img_desktop != blank -%}
+    <div class="tv-hero__media tv-hero__media--desktop">
+      {{ img_desktop | image_url: width: 2400 | image_tag: widths: '750, 1100, 1500, 1800, 2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: heading }}
+    </div>
+    <div class="tv-hero__media tv-hero__media--mobile">
+      {{ img_mobile | image_url: width: 1100 | image_tag: widths: '375, 550, 750, 1100', sizes: '100vw', loading: 'eager', alt: heading }}
+    </div>
+  {%- endif -%}
+
+  {%- if heading != blank or subtext != blank or button_label != blank or promo_label != blank -%}
+    <div class="tv-hero__content">
+      {%- if promo_label != blank -%}
+        <p class="tv-hero__promo">
+          {{ promo_label | escape }}{% if promo_code != blank %} · Code <strong>{{ promo_code | escape }}</strong>{% endif %}
+        </p>
+      {%- endif -%}
+      {%- if heading != blank -%}
+        <h2 class="tv-hero__heading {{ section.settings.heading_size }}">{{ heading | escape }}</h2>
+      {%- endif -%}
+      {%- if subtext != blank -%}
+        <p class="tv-hero__sub">{{ subtext | escape | newline_to_br }}</p>
+      {%- endif -%}
+      {%- if button_label != blank and button_link != blank -%}
+        <a class="button button--primary" href="{{ button_link }}">{{ button_label | escape }}</a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Tailvani seasonal hero",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "paragraph", "content": "When a seasonal skin is active, its image, heading, text, button and promo replace the fallback below." },
+    { "type": "image_picker", "id": "image", "label": "Fallback image (desktop)" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Fallback image (mobile)" },
+    { "type": "text", "id": "fallback_asset", "label": "Fallback theme image file", "default": "wide_banner.png", "info": "Used only when no image is picked above and no skin image is set." },
+    { "type": "text", "id": "heading", "label": "Fallback heading", "default": "A Style for Every Tail" },
+    { "type": "select", "id": "heading_size", "label": "Heading size", "default": "h1",
+      "options": [ { "value": "h2", "label": "Small" }, { "value": "h1", "label": "Medium" }, { "value": "h0", "label": "Large" } ] },
+    { "type": "textarea", "id": "subtext", "label": "Fallback text", "default": "Boutique essentials for modern pet parents." },
+    { "type": "text", "id": "button_label", "label": "Fallback button label", "default": "Shop the collection" },
+    { "type": "url", "id": "button_link", "label": "Fallback button link" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "t:sections.all.colors.label", "default": "scheme-1" }
+  ],
+  "presets": [ { "name": "Tailvani seasonal hero" } ]
+}
+{% endschema %}

@@ -231,6 +231,14 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'tailvani-polish.css' | asset_url | stylesheet_tag }}
+
+    {%- comment -%} Tailvani seasonal skin layer (Revamp Plan v2 §5) {%- endcomment -%}
+    {%- capture tv_skin_handle -%}{%- render 'tv-skin-handle' -%}{%- endcapture -%}
+    {%- assign tv_skin_handle = tv_skin_handle | strip -%}
+    {%- if tv_skin_handle != blank -%}
+      {%- assign tv_skin = metaobjects.tailvani_season_skin[tv_skin_handle] -%}
+      {%- render 'tv-skin-styles', skin: tv_skin, part: 'css' -%}
+    {%- endif -%}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}
@@ -266,7 +274,8 @@
     </script>
   </head>
 
-  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  <body data-tv-skin="{{ tv_skin_handle }}" class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+    {%- if tv_skin != blank -%}{%- render 'tv-skin-styles', skin: tv_skin, part: 'overlay' -%}{%- endif -%}
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>

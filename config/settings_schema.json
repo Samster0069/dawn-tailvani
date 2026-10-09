@@ -1451,5 +1451,33 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "Tailvani seasonal skins",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Skins live in Content → Metaobjects → Tailvani Seasonal Skin. The active skin is picked by date and priority. Use the override to force one on (e.g. a midnight launch)."
+      },
+      {
+        "type": "checkbox",
+        "id": "tv_skins_disabled",
+        "label": "Disable all seasonal skins",
+        "default": false
+      },
+      {
+        "type": "metaobject",
+        "id": "tv_skin_override",
+        "label": "Seasonal skin override",
+        "metaobject_type": "tailvani_season_skin",
+        "info": "Leave empty to switch automatically by date."
+      },
+      {
+        "type": "checkbox",
+        "id": "tv_skin_badges",
+        "label": "Show skin badge on featured products",
+        "default": true
+      }
+    ]
   }
 ]

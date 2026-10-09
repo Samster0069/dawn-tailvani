@@ -9,15 +9,6 @@
  */
 {
   "sections": {
-    "hero_banner": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<section style='padding:0;background:#F6EFE5'><img src='{{ \"wide_banner.png\" | asset_url }}' alt='Tailvani banner' style='width:100%;display:block;border-radius:0;'/></section>",
-        "color_scheme": "scheme-1",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
     "mobile_story_banner": {
       "type": "custom-liquid",
       "settings": {
@@ -161,10 +152,22 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "tv_seasonal_hero": {
+      "type": "tv-seasonal-hero",
+      "settings": {
+        "fallback_asset": "wide_banner.png",
+        "heading": "",
+        "subtext": "",
+        "button_label": "Shop the collection",
+        "button_link": "shopify://collections/all",
+        "heading_size": "h1",
+        "color_scheme": "scheme-1"
+      }
     }
   },
   "order": [
-    "hero_banner",
+    "tv_seasonal_hero",
     "mobile_story_banner",
     "rich_text",
     "featured_collection",

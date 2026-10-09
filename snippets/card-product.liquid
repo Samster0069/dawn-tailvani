@@ -28,6 +28,20 @@
   {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
   {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {%- endunless -%}
+{%- comment -%} Tailvani seasonal skin badge {%- endcomment -%}
+{%- assign tv_badge = '' -%}
+{%- if settings.tv_skin_badges and card_product and card_product != empty -%}
+  {%- capture tv_skin_handle -%}{%- render 'tv-skin-handle' -%}{%- endcapture -%}
+  {%- assign tv_skin_handle = tv_skin_handle | strip -%}
+  {%- if tv_skin_handle != blank -%}
+    {%- assign tv_skin = metaobjects.tailvani_season_skin[tv_skin_handle] -%}
+    {%- assign tv_coll = tv_skin.hero_collection.value -%}
+    {%- if tv_skin.badge_text != blank and tv_coll != blank -%}
+      {%- assign tv_in = card_product.collections | where: 'id', tv_coll.id | size -%}
+      {%- if tv_in > 0 -%}{%- assign tv_badge = tv_skin.badge_text.value -%}{%- endif -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
 {%- if card_product and card_product != empty -%}
   {%- liquid
     assign ratio = 1
@@ -139,6 +153,8 @@
               >
                 {{- 'products.product.on_sale' | t -}}
               </span>
+            {%- elsif tv_badge != blank -%}
+              <span class="badge badge--bottom-left tv-skin-badge">{{ tv_badge | escape }}</span>
             {%- endif -%}
           </div>
         </div>
@@ -563,6 +579,8 @@
             >
               {{- 'products.product.on_sale' | t -}}
             </span>
+          {%- elsif tv_badge != blank -%}
+            <span class="badge badge--bottom-left tv-skin-badge">{{ tv_badge | escape }}</span>
           {%- endif -%}
         </div>
       </div>

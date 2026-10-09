@@ -13,6 +13,13 @@
     assign announcement_bar = true
   endif
 -%}
+{%- comment -%} Tailvani seasonal skin: its announcement replaces the first message {%- endcomment -%}
+{%- capture tv_skin_handle -%}{%- render 'tv-skin-handle' -%}{%- endcapture -%}
+{%- assign tv_skin_handle = tv_skin_handle | strip -%}
+{%- assign tv_announce = '' -%}
+{%- if tv_skin_handle != blank -%}
+  {%- assign tv_announce = metaobjects.tailvani_season_skin[tv_skin_handle].announcement_text.value -%}
+{%- endif -%}
 
 {% if social_icons %}
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
@@ -40,7 +47,7 @@
             >
           {%- endif -%}
           <p class="announcement-bar__message h5">
-            <span>{{ section.blocks.first.settings.text | escape }}</span>
+            <span>{% if tv_announce != blank %}{{ tv_announce | escape }}{% else %}{{ section.blocks.first.settings.text | escape }}{% endif %}</span>
             {%- if section.blocks.first.settings.link != blank -%}
               {{- 'icon-arrow.svg' | inline_asset_content -}}
             {%- endif -%}
@@ -100,7 +107,7 @@
                       >
                     {%- endif -%}
                     <p class="announcement-bar__message h5">
-                      <span>{{ block.settings.text | escape }}</span>
+                      <span>{% if forloop.first and tv_announce != blank %}{{ tv_announce | escape }}{% else %}{{ block.settings.text | escape }}{% endif %}</span>
                       {%- if block.settings.link != blank -%}
                         {{- 'icon-arrow.svg' | inline_asset_content -}}
                       {%- endif -%}
