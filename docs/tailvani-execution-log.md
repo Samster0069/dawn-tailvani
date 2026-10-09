@@ -189,3 +189,8 @@ Spending (samples) and account/tax submissions are still done BY SURI; Claude dr
   - Tiles reordered: For cats, For small dogs, Walk and play.
   - Menus: Cats before Dogs. New "Other pets" collection (tag pet:other) appears only under Accessories and in the footer, not top level.
   - Theme commit 1262740.
+- 03:23 Repo completeness check on Suri's request:
+  - Theme branch revamp-seasonal @1262740: everything pushed, working tree clean.
+  - Media branch @64e7fb1 adds records/ (Shopify admin setup: skin and collection GraphQL, file IDs, menus, pages, tag taxonomy), qa/ (mock + screenshot scripts) and docs/ (log, design direction, revamp plan, banner sheets).
+  - Collection images for new-arrivals, fall, spring, summer, holiday-gifts, valentines, easter, fourth-of-july and other-pets updated to the cat/small-dog photos.
+  - Not in the repo, by design: the ~170 raw stock photos (originals are on Pexels/Unsplash/Openverse; credits are in the repo).
