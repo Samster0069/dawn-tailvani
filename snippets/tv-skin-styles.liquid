@@ -42,13 +42,19 @@
 
 {%- if skin != blank and part == 'overlay' -%}
   {%- assign asset = skin.overlay_asset.value -%}
+  {%- assign theme_asset = skin.overlay_theme_asset.value -%}
   {%- assign density = skin.overlay_density.value | default: 0 | times: 1 | at_most: 30 -%}
-  {%- if asset != blank and density > 0 -%}
+  {%- assign asset_src = '' -%}
+  {%- if asset != blank -%}
     {%- if asset.media_type == 'image' -%}
       {%- assign asset_src = asset | image_url: width: 96 -%}
     {%- else -%}
       {%- assign asset_src = asset.url -%}
     {%- endif -%}
+  {%- elsif theme_asset != blank -%}
+    {%- assign asset_src = 'tv-overlay-' | append: theme_asset | append: '.svg' | asset_url -%}
+  {%- endif -%}
+  {%- if asset_src != blank and density > 0 -%}
     <style>
       .tv-skin-overlay { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 3; }
       .tv-skin-overlay span {
