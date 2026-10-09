@@ -17,17 +17,25 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "Use code WELCOME for 10% off your first order. Free US shipping over $35.",
+            "text": "Free US shipping on orders over $35",
+            "link": "/policies/shipping-policy"
+          }
+        },
+        "announcement-bar-1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Use code WELCOME for 10% off your first order",
             "link": "/collections/new-arrivals"
           }
         }
       },
       "block_order": [
-        "announcement-bar-0"
+        "announcement-bar-0",
+        "announcement-bar-1"
       ],
       "settings": {
-        "auto_rotate": false,
-        "change_slides_speed": 5,
+        "auto_rotate": true,
+        "change_slides_speed": 6,
         "color_scheme": "scheme-4",
         "show_line_separator": false,
         "show_social": false,
