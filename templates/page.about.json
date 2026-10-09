@@ -1,0 +1,66 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 24
+      }
+    },
+    "tv_garland": {
+      "type": "tv-garland",
+      "settings": {
+        "icon": "sprig",
+        "size": 24,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "tv_tiles": {
+      "type": "tv-shop-by-pet",
+      "blocks": {
+        "dogs": {
+          "type": "tile",
+          "settings": {
+            "collection": "dogs",
+            "image": "shopify://shop_images/tv-tile-dogs.jpg",
+            "title": "For dogs",
+            "caption": "Sweaters, coats and walk gear"
+          }
+        },
+        "cats": {
+          "type": "tile",
+          "settings": {
+            "collection": "cats",
+            "image": "shopify://shop_images/tv-tile-cats.jpg",
+            "title": "For cats",
+            "caption": "Collars, bandanas and cozy picks"
+          }
+        },
+        "accessories": {
+          "type": "tile",
+          "settings": {
+            "collection": "accessories",
+            "image": "shopify://shop_images/tv-tile-accessories.jpg",
+            "title": "Walk and play",
+            "caption": "Harnesses, leashes and toys"
+          }
+        }
+      },
+      "block_order": [
+        "dogs",
+        "cats",
+        "accessories"
+      ],
+      "settings": {
+        "heading": "Start shopping",
+        "text": "",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "tv_garland",
+    "tv_tiles"
+  ]
+}

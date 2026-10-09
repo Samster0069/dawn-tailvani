@@ -212,7 +212,8 @@
     },
     "logo": "shopify://shop_images/tailvani-logo.png",
     "animations_reveal_on_scroll": false,
-    "animations_hover_elements": "none"
+    "animations_hover_elements": "none",
+    "favicon": "shopify://shop_images/tailvani-mark.png"
   },
   "presets": {
     "Default": {

@@ -1,0 +1,167 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "row0": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How long does shipping take?",
+            "icon": "truck",
+            "row_content": "<p>Orders are processed within 1–3 business days after payment (not on weekends or holidays). Delivery is estimated at 7–12 business days. Carrier delays, weather or high demand can add time.</p>",
+            "page": ""
+          }
+        },
+        "row1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Is shipping free?",
+            "icon": "price_tag",
+            "row_content": "<p>Yes, on orders over $35 USD, unless stated otherwise at checkout.</p>",
+            "page": ""
+          }
+        },
+        "row2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I track my order?",
+            "icon": "box",
+            "row_content": "<p>If tracking is available for your order, we'll email you the details as soon as it ships.</p>",
+            "page": ""
+          }
+        },
+        "row3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is your return policy?",
+            "icon": "return",
+            "row_content": "<p>You can return items within 14 days of confirmed delivery if they are unused, unworn, unwashed and in their original condition, with tags and packaging where applicable. Email tailvaniandco@gmail.com with your order number, the items and the reason before sending anything back. Return shipping is paid by the customer unless the item arrived damaged, defective or incorrect.</p><p><a href=\"/policies/refund-policy\">Read the full return and refund policy</a></p>",
+            "page": ""
+          }
+        },
+        "row4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "My order arrived damaged or wrong. What should I do?",
+            "icon": "question_mark",
+            "row_content": "<p>Email tailvaniandco@gmail.com within 5 days of delivery with your order number and clear photos. Once we review it, we'll offer a replacement, refund or store credit.</p>",
+            "page": ""
+          }
+        },
+        "row5": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I cancel or change my order?",
+            "icon": "chat_bubble",
+            "row_content": "<p>Orders can be canceled within 12 hours of purchase. Email us as soon as possible with your order number.</p>",
+            "page": ""
+          }
+        },
+        "row6": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I choose a size?",
+            "icon": "ruler",
+            "row_content": "<p>Measure your pet's neck, chest and back length, then compare with the size chart in the product photos or description. If your pet is between sizes, size up for coats and sweaters.</p>",
+            "page": ""
+          }
+        },
+        "row7": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Do you have a first-order discount?",
+            "icon": "heart",
+            "row_content": "<p>Yes. Use code WELCOME at checkout for 10% off your first order.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "row0",
+        "row1",
+        "row2",
+        "row3",
+        "row4",
+        "row5",
+        "row6",
+        "row7"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "",
+        "heading_size": "h1",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-3",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 12,
+        "padding_bottom": 64
+      }
+    },
+    "tv_trust": {
+      "type": "tv-trust-strip",
+      "blocks": {
+        "ship": {
+          "type": "fact",
+          "settings": {
+            "icon": "truck",
+            "title": "Free US shipping over $35",
+            "text": "Shipping details",
+            "link": "/policies/shipping-policy"
+          }
+        },
+        "returns": {
+          "type": "fact",
+          "settings": {
+            "icon": "return",
+            "title": "14-day returns",
+            "text": "On unused items with tags",
+            "link": "/policies/refund-policy"
+          }
+        },
+        "process": {
+          "type": "fact",
+          "settings": {
+            "icon": "box",
+            "title": "Packed in 1–3 business days",
+            "text": "Delivery in 7–12 business days"
+          }
+        },
+        "help": {
+          "type": "fact",
+          "settings": {
+            "icon": "chat-bubble",
+            "title": "Still need help?",
+            "text": "Contact us",
+            "link": "/pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "ship",
+        "returns",
+        "process",
+        "help"
+      ],
+      "settings": {
+        "label": "Shopping with Tailvani",
+        "color_scheme": "scheme-3"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq",
+    "tv_trust"
+  ]
+}
